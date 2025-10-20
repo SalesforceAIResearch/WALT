@@ -1,0 +1,135 @@
+{
+  "name": "Homepage keyword search with optional refinements (OsClass)",
+  "description": "Performs a keyword search with user-provided keywords (atleast 4 characters) and optionally applies common refinements (pictures only, price range, category, sort, view mode, pagination) via URL parameters. Performs fresh search, can be called from any page. Precondition: None (Can be called from any page). Successful outcome: Navigation to page with search results.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the classifieds homepage.",
+      "output": null,
+      "type": "navigation",
+      "url": "http://localhost:9980/index.php?page=search",
+      "url_operation": null
+    },
+    {
+      "description": "Perform search with provided parameters by constructing URL.",
+      "output": null,
+      "type": "navigation",
+      "url": null,
+      "url_operation": {
+        "base": "{current_url}",
+        "replace": {
+          "sPattern": "{sPattern}",
+          "bPic": "{bPic}",
+          "sPriceMin": "{sPriceMin}",
+          "sPriceMax": "{sPriceMax}",
+          "sCategory": "{sCategory}",
+          "sOrder": "{sOrder}",
+          "iOrderType": "{iOrderType}",
+          "sShowAs": "{sShowAs}",
+          "iPage": "{iPage}"
+        }
+      }
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "sPattern",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "bPic",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "0",
+        "1"
+      ]
+    },
+    {
+      "name": "sPriceMin",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "sPriceMax",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "sCategory",
+      "type": "string",
+      "format": "Needs category ID between 2-25 (NOT category name). Use this mapping from name to ID - {Antiques: 2, Appliances: 3, Arts + crafts: 4, Auto parts: 5, Beauty + health: 6, Bikes: 7, Boats: 8, Books: 9, Cars + trucks: 10, Cell phones: 11, Collectibles: 12, Computer parts: 13, Computers: 14, Electronics: 15, Farm + garden: 16, Furniture: 17, Household: 18, Jewelry: 19, Motorcycles: 20, Music instruments: 21, Photo + video: 22, Rvs + campers: 23, Video gaming: 24}",
+      "required": false,
+      "enum": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24"
+      ]
+    },
+    {
+      "name": "sOrder",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "dt_pub_date",
+        "i_price"
+      ]
+    },
+    {
+      "name": "iOrderType",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    },
+    {
+      "name": "sShowAs",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "list",
+        "gallery"
+      ]
+    },
+    {
+      "name": "iPage",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    }
+  ]
+}

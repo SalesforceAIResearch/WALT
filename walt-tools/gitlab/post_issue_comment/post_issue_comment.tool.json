@@ -1,0 +1,55 @@
+{
+  "name": "gitlab_issue_post_comment",
+  "description": "Posts a discussion comment to a GitLab issue detail page using stable selectors for the composer and Comment button.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the target GitLab issue detail page directly.",
+      "output": null,
+      "type": "navigation",
+      "url": "{issue_url}",
+      "url_operation": null
+    },
+    {
+      "description": "Enter the comment text into the main discussion composer (form field note[note]).",
+      "output": null,
+      "cssSelector": "#note-body",
+      "xpath": "html/body/div[3]/div/div[3]/main/div[3]/div[3]/section/div/div[2]/ul/li/div/div/form/div/div[2]/div[2]/div/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "a3d804bb72",
+      "type": "input",
+      "value": "{note_text}"
+    },
+    {
+      "description": "Submit the comment using the primary Comment button. ElementHash disambiguates from 'Comment & close issue'.",
+      "output": null,
+      "cssSelector": "button.split-content-button",
+      "xpath": "html/body/div[3]/div/div[3]/main/div[3]/div[3]/section/div/div[2]/ul/li/div/div/form/div[2]/div[2]/button",
+      "elementTag": "button",
+      "elementHash": "62e1fe392a",
+      "type": "click"
+    },
+    {
+      "description": "Allow time for the page to post and render the new comment.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "issue_url",
+      "type": "string",
+      "format": "https://host/namespace/project/-/issues/:iid",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "note_text",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

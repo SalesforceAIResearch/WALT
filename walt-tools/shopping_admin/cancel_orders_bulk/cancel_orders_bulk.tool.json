@@ -1,0 +1,114 @@
+{
+  "name": "MagentoAdmin_MassCancelByStatus",
+  "description": "Filters orders by Status on the Admin Orders grid, selects rows via the Select menu, and executes the Mass Action: Cancel on selected orders. Verifies completion by extracting the page for success indicators.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the Magento Admin Orders grid",
+      "output": null,
+      "type": "navigation",
+      "url": "http://3.12.136.212:7780/admin/sales/order/",
+      "url_operation": null
+    },
+    {
+      "description": "Open the Filters panel",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-expand\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[3]/div/button",
+      "elementTag": "button",
+      "elementHash": "e1690a31fa",
+      "type": "click"
+    },
+    {
+      "description": "Set the Status filter to the provided value",
+      "output": null,
+      "cssSelector": "select[name=\"status\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/div[5]/div/select",
+      "elementTag": "select",
+      "elementHash": "10095bcb2c",
+      "type": "select_change",
+      "selectedText": "{status_filter}"
+    },
+    {
+      "description": "Apply Filters to refresh the grid",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-apply\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/div/div/button[2]",
+      "elementTag": "button",
+      "elementHash": "a0f0d35e24",
+      "type": "click"
+    },
+    {
+      "description": "Wait for the grid to refresh after applying filters",
+      "output": null,
+      "type": "wait",
+      "seconds": 1.0
+    },
+    {
+      "description": "Open the Select menu for bulk selection controls",
+      "output": null,
+      "cssSelector": "button[title=\"Select Items\"][title=\"Select Items\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div[2]/div/div/button",
+      "elementTag": "button",
+      "elementHash": "d548ddb78f",
+      "type": "click"
+    },
+    {
+      "description": "Select orders using the Select dropdown (e.g., 'Select All on This Page' or 'Select All'). Menu options are dynamic.",
+      "output": null,
+      "type": "agent",
+      "task": "From the grid's Select menu, choose {select_menu_option}",
+      "max_steps": 5
+    },
+    {
+      "description": "Open the Actions (Mass Actions) dropdown",
+      "output": null,
+      "cssSelector": "button[title=\"Select Items\"][title=\"Select Items\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div[2]/div/div/button",
+      "elementTag": "button",
+      "elementHash": "d548ddb78f",
+      "type": "click"
+    },
+    {
+      "description": "Mass action menu items and confirmation modals are dynamic; apply Cancel to the current selection.",
+      "output": null,
+      "type": "agent",
+      "task": "In the Actions dropdown, click 'Cancel' for the selected orders and confirm any modal dialog if prompted",
+      "max_steps": 6
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "status_filter",
+      "type": "string",
+      "format": null,
+      "description": "Visible text of the Status filter to apply on the Orders grid",
+      "required": true,
+      "enum": [
+        "Canceled",
+        "Closed",
+        "Complete",
+        "Suspected Fraud",
+        "On Hold",
+        "Payment Review",
+        "PayPal Canceled Reversal",
+        "PayPal Reversed",
+        "Pending",
+        "Pending Payment",
+        "Pending PayPal",
+        "Processing"
+      ]
+    },
+    {
+      "name": "select_menu_option",
+      "type": "string",
+      "format": null,
+      "description": "Selection command from the 'Select' menu to choose which rows to target",
+      "required": true,
+      "enum": [
+        "Select All",
+        "Select All on This Page"
+      ]
+    }
+  ]
+}

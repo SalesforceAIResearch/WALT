@@ -1,0 +1,50 @@
+{
+  "name": "subscribe_newsletter_footer_magento",
+  "description": "Subscribe to the One Stop Market newsletter from the homepage footer using a provided email. PRECONDITION: The newsletter form must be available on the page. Successful outcome: The user is subscribed to the newsletter.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the store homepage where the footer newsletter form is available.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/",
+      "url_operation": null
+    },
+    {
+      "description": "Enter the provided email into the footer newsletter input field (name=email, id=newsletter).",
+      "output": null,
+      "cssSelector": "#newsletter",
+      "xpath": "html/body/div[2]/footer/div/div/div[2]/form/div/div/label/input",
+      "elementTag": "input",
+      "elementHash": "b2691f35f9",
+      "type": "input",
+      "value": "{email}"
+    },
+    {
+      "description": "Submit the newsletter form by clicking the Subscribe button.",
+      "output": null,
+      "cssSelector": "button[aria-label=\"Subscribe\"][title=\"Subscribe\"]",
+      "xpath": "html/body/div[2]/footer/div/div/div[2]/form/div[2]/button",
+      "elementTag": "button",
+      "elementHash": "79e2d3d408",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL with protocol (e.g., http://localhost:7770 for VWA or http://3.12.136.212:7770 for WebArena)"
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "format": "user@domain.com",
+      "required": true,
+      "enum": null
+    }
+  ]
+}

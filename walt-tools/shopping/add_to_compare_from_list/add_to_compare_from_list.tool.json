@@ -1,0 +1,32 @@
+{ 
+  "name": "workflow_add_to_compare_from_results",
+  "description": "Add an item to the compare list from its details page. PRECONDITION: Can be called from any page. Successful outcome: The item is added to the compare list.",
+  "version": "2.0.0",
+  "steps": [
+    {
+      "description": "Open the product detail page.",
+      "output": null,
+      "type": "navigation",
+      "url": "{product_url}",
+      "url_operation": null
+    },   
+    {
+      "description": "Add the item to the compare list.",
+      "output": null,
+      "cssSelector": "a.action.tocompare",
+      "xpath": null,
+      "elementTag": null,
+      "elementHash": null,
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "product_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

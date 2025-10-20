@@ -1,0 +1,44 @@
+{
+  "name": "workflow_remove_cart_item",
+  "description": "Remove a specified product from the shopping cart. PRECONDITION: The cart must contain the product to remove. Successful outcome: The product is removed from the cart.",
+  "version": "v4",
+  "steps": [
+    {
+      "description": "Open the Shopping Cart page at a fixed, valid URL to avoid invalid navigation inputs.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/checkout/cart/",
+      "url_operation": null
+    },
+    {
+      "description": "Cart content and element hashes are dynamic; the agent locates the row by visible product name and triggers its remove action.",
+      "output": null,
+      "type": "agent",
+      "task": "On the Shopping Cart page, find the cart line item whose product name most closely matches \"{product_name}\" and click its associated \"Remove item\" control/link.",
+      "max_steps": 5
+    },
+    {
+      "description": "Wait for the cart update confirmation to ensure the product is successfully removed.",
+      "output": null,
+      "type": "wait",
+      "seconds": 3
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL with protocol (e.g., http://localhost:7770 for VWA or http://3.12.136.212:7770 for WebArena)"
+    },
+    {
+      "name": "product_name",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

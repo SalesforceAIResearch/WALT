@@ -1,0 +1,73 @@
+{
+  "name": "post_comment",
+  "description": "Posts a public comment on a listing by filling out a form. Precondition: Listing should exist. Can be called from any page. Successful outcome: Posted comment.",
+  "version": "1.0",
+  "steps": [
+    {
+      "description": "Open the listing detail page for the specified item ID.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/index.php?page=item&id={id}",
+      "url_operation": null
+    },
+    {
+      "description": "Enter the comment title/subject.",
+      "output": null,
+      "cssSelector": "#title",
+      "xpath": "html/body/section/div[3]/div/div/div[6]/div/div[2]/form/fieldset/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "9e9d576c63",
+      "type": "input",
+      "value": "{comment_title}"
+    },
+    {
+      "description": "Enter the public comment text.",
+      "output": null,
+      "cssSelector": "#body",
+      "xpath": "html/body/section/div[3]/div/div/div[6]/div/div[2]/form/fieldset/div[4]/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "680f0b15a3",
+      "type": "input",
+      "value": "{comment_body}"
+    },
+    {
+      "description": "Submit the comment form.",
+      "output": null,
+      "cssSelector": "button.btn.btn-primary",
+      "xpath": "html/body/section/div[3]/div/div/div[6]/div/div[2]/form/fieldset/div[5]/button",
+      "elementTag": "button",
+      "elementHash": "6b7b9aeb9f",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "comment_title",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "comment_body",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

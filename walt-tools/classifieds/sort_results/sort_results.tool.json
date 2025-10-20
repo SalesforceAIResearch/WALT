@@ -1,0 +1,42 @@
+{
+  "name": "sort_search_results_by_order",
+  "description": "Apply the desired sorting (field and direction), optionally setting the view mode, using URL parameters for deterministic navigation. Precondition: Must be on a search results page. Successful outcome: Reload page with sorted search results.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Apply sorting by updating URL parameters on the current search results page",
+      "output": null,
+      "type": "navigation",
+      "url": null,
+      "url_operation": {
+        "base": "{current_url}",
+        "replace": {
+          "sOrder": "{sOrder}",
+          "iOrderType": "{iOrderType}"
+        }
+      }
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "sOrder",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "dt_pub_date",
+        "i_price"
+      ]
+    },
+    {
+      "name": "iOrderType",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "asc",
+        "desc"
+      ]
+    }    
+  ]
+}

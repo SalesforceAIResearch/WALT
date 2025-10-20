@@ -1,0 +1,40 @@
+{
+  "name": "workflow_search_for_location",
+  "description": "Find a location on OpenStreetMap and optionally specify a zoom level. PRECONDITION: Can be called from any page. Successful outcome: The map is automaticallycentered on the first search result. The URL will contain the coordinates (latitute and longitude).",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Navigate to OpenStreetMap and search for the location.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/search?query={location}#map={zoom_level}",
+      "url_operation": null
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL of the OpenStreetMap instance (e.g., http://3.12.136.212:3000)"
+    },
+    {
+      "name": "location",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null,
+      "description": "Location to find (e.g., 'Boston', 'Harvard University', '123 Main St, Cambridge, MA')"
+    },
+    {
+      "name": "zoom_level",
+      "type": "number",
+      "format": null,
+      "required": false,
+      "enum": null,
+      "description": "Map zoom level (higher = more zoomed in)"
+    }
+  ]
+}

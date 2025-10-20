@@ -1,0 +1,54 @@
+{
+  "name": "update_cart_item_quantity.v2",
+  "description": "On the Shopping Cart page, locate a line item by its title and set its quantity to the specified value. PRECONDITION: The cart must contain the item to update. Successful outcome: The item is updated in the cart.",
+  "version": "2.0",
+  "steps": [
+    {
+      "description": "Open the Shopping Cart page.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/checkout/cart/",
+      "url_operation": null
+    },
+    {
+      "description": "Cart contents and input ids vary; use reasoning to match the product anchor text and update the adjacent Qty input.",
+      "output": null,
+      "type": "agent",
+      "task": "Find the shopping cart line item with title matching {item_title} and set the quantity input for that same row to {qty}. Ensure the field is cleared before typing.",
+      "max_steps": 6
+    },
+    {
+      "description": "Click the Update Shopping Cart button to submit the quantity change.",
+      "output": null,
+      "cssSelector": "button[name=\"update_cart_action\"][type=\"submit\"]",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[2]/form/div[2]/button",
+      "elementTag": "button",
+      "elementHash": "48c08b866f",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL with protocol (e.g., http://localhost:7770 for VWA or http://3.12.136.212:7770 for WebArena)"
+    },
+    {
+      "name": "item_title",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "qty",
+      "type": "number",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

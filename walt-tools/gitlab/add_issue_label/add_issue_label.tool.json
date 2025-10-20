@@ -1,0 +1,63 @@
+{
+  "name": "gitlab_issue_assign_label_via_sidebar",
+  "description": "Assign a label to a GitLab issue using the right sidebar Labels editor; if the label does not exist, create it via the Create project label popover and then assign it.",
+  "version": "1.0",
+  "steps": [
+    {
+      "description": "Open the GitLab issue details page directly.",
+      "output": null,
+      "type": "navigation",
+      "url": "{issue_url}",
+      "url_operation": null
+    },
+    {
+      "description": "Open the Labels editor (Edit) in the right sidebar.",
+      "output": null,
+      "cssSelector": "button[data-testid=\"edit-button\"]",
+      "xpath": "html/body/div[3]/div/div[3]/main/aside/div/form/div[2]/div/div/button",
+      "elementTag": "button",
+      "elementHash": "377efeb4d7",
+      "type": "click"
+    },
+    {
+      "description": "Search for the desired label name in the Assign labels popover.",
+      "output": null,
+      "cssSelector": "input[placeholder=\"Search labels\"][aria-label=\"Search labels\"]",
+      "xpath": "html/body/div[3]/div/div[3]/main/aside/div/form/div[2]/div/div[3]/div[2]/ul/div/div/div/div[2]/input",
+      "elementTag": "input",
+      "elementHash": "2ffa3fe6ce",
+      "type": "input",
+      "value": "{label_name}"
+    },
+    {
+      "description": "Handle dynamic existence: create the label if missing and select it to assign.",
+      "output": null,
+      "type": "agent",
+      "task": "In the Assign labels popover, ensure label named {label_name} is assigned to this issue. If it exists, tick its checkbox to assign. If it does not exist: 1) click 'Create project label' (elementHash=b86ec1649a), 2) input {label_name} into the name field (elementHash=53d92a5da0), 3) if label_color is provided, set the custom color to {label_color}, 4) click 'Create' (elementHash=65ee200430). After creation, select the label by name to assign it, then close the popover if needed.",
+      "max_steps": 7
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "issue_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "label_name",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "label_color",
+      "type": "string",
+      "format": "^#?[0-9A-Fa-f]{6}$",
+      "required": false,
+      "enum": null
+    }
+  ]
+}

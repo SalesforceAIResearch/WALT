@@ -1,0 +1,23 @@
+{
+  "name": "paginate_forum",
+  "description": "Click the 'More' button to load the next page of a forum. PRECONDITION: Must be on a forum page with a 'More' button visible. Successful outcome: The next page of submissions is loaded.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Click the More button to load next page",
+      "output": null,
+      "cssSelector": "a.button.button--secondary[rel=\"next\"]",
+      "xpath": null,
+      "elementTag": "a",
+      "elementHash": null,
+      "type": "click"
+    },
+    {
+      "description": "Wait for next page to load",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    }
+  ],
+  "input_schema": []
+}

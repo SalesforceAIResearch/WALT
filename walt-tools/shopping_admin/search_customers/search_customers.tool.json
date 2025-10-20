@@ -1,0 +1,171 @@
+{
+  "name": "workflow_search_export_customers.v3",
+  "description": "Admin workflow to search and filter customers (keyword, name, email, group, country, website).",
+  "version": "3.0",
+  "steps": [
+    {
+      "description": "Open Admin Customers grid directly.",
+      "output": null,
+      "type": "navigation",
+      "url": "{admin_customer_index_url}",
+      "url_operation": null
+    },
+    {
+      "description": "Allow grid UI to load.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    },
+    {
+      "description": "Enter global keyword into Search field (above grid).",
+      "output": null,
+      "cssSelector": "input[placeholder=\"Search by keyword\"][aria-label=\"Search by keyword\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[2]/input",
+      "elementTag": "input",
+      "elementHash": "4e641cc4c6",
+      "type": "input",
+      "value": "{keyword}"
+    },
+    {
+      "description": "Trigger grid Search.",
+      "output": null,
+      "cssSelector": "button[aria-label=\"Search\"][aria-label=\"Search\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[2]/button",
+      "elementTag": "button",
+      "elementHash": "341036eef5",
+      "type": "click"
+    },
+    {
+      "description": "Open Advanced Filters panel.",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-expand\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[3]/div/button",
+      "elementTag": "button",
+      "elementHash": "e1690a31fa",
+      "type": "click"
+    },
+    {
+      "description": "Set Advanced filter: Name.",
+      "output": null,
+      "cssSelector": "input[name=\"name\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/div/div/input",
+      "elementTag": "input",
+      "elementHash": "7babc7ade8",
+      "type": "input",
+      "value": "{name}"
+    },
+    {
+      "description": "Set Advanced filter: Email.",
+      "output": null,
+      "cssSelector": "input[name=\"email\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "14fad81a91",
+      "type": "input",
+      "value": "{email}"
+    },
+    {
+      "description": "Set Advanced filter: Group (visible text).",
+      "output": null,
+      "cssSelector": "select[name=\"group_id\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/div[3]/div/select",
+      "elementTag": "select",
+      "elementHash": "688e452936",
+      "type": "select_change",
+      "selectedText": "{group}"
+    },
+    {
+      "description": "Set Advanced filter: Country (visible text).",
+      "output": null,
+      "cssSelector": "select[name=\"billing_country_id\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/div[6]/div/select",
+      "elementTag": "select",
+      "elementHash": "5d63692df8",
+      "type": "select_change",
+      "selectedText": "{country}"
+    },
+    {
+      "description": "Set Advanced filter: Web Site (visible text).",
+      "output": null,
+      "cssSelector": "select[name=\"website_id\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/div[8]/div/select",
+      "elementTag": "select",
+      "elementHash": "13f56d9301",
+      "type": "select_change",
+      "selectedText": "{website}"
+    },
+    {
+      "description": "Apply Filters.",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-apply\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/div/div/button[2]",
+      "elementTag": "button",
+      "elementHash": "a0f0d35e24",
+      "type": "click"
+    },
+    {
+      "description": "Wait for grid to refresh with filtered results.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    }    
+  ],
+  "input_schema": [
+    {
+      "name": "admin_customer_index_url",
+      "type": "string",
+      "format": null,
+      "description": "Full URL to the Magento Admin Customers grid (e.g., http://host:port/admin/customer/index/).",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "keyword",
+      "type": "string",
+      "format": null,
+      "description": "Global Search keyword (grid search box above the table). Leave empty to skip keyword filtering.",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "format": null,
+      "description": "Advanced filter: Name field value.",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "format": "user@domain.com",
+      "description": "Advanced filter: Email. Also used to locate the row for Edit action.",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "group",
+      "type": "string",
+      "format": null,
+      "description": "Advanced filter: Group (visible text option, e.g., General, Retailer, Wholesale, etc.).",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "country",
+      "type": "string",
+      "format": null,
+      "description": "Advanced filter: Country (visible text option, e.g., United States).",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "website",
+      "type": "string",
+      "format": null,
+      "description": "Advanced filter: Web Site (visible text option, e.g., Main Website).",
+      "required": true,
+      "enum": null
+    }
+  ]
+}

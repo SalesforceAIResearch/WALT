@@ -1,0 +1,99 @@
+{
+  "name": "workflow_get_directions.v1",
+  "description": "Compute a route on OpenStreetMap between two inputs with a chosen profile, click Go.",
+  "version": "1.0",
+  "steps": [
+    {
+      "description": "Open the OpenStreetMap Directions page.",
+      "output": null,
+      "type": "navigation",
+      "url": "http://3.12.136.212:3000/directions",
+      "url_operation": null
+    },
+    {
+      "description": "Wait for directions form to be ready.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    },
+    {
+      "description": "Enter origin with more specific selector to avoid multiple elements.",
+      "output": null,
+      "cssSelector": "#sidebar input[name=\"route_from\"]",
+      "xpath": "html/body/div/div/div/form[2]/div[2]/div[2]/input",
+      "elementTag": "input",
+      "elementHash": "aad55dacc4",
+      "type": "input",
+      "value": "{from_text}"
+    },
+    {
+      "description": "Enter destination with more specific selector to avoid multiple elements.",
+      "output": null,
+      "cssSelector": "#sidebar input[name=\"route_to\"]",
+      "xpath": "html/body/div/div/div/form[2]/div[3]/div[2]/input",
+      "elementTag": "input",
+      "elementHash": "c51cc71ca1",
+      "type": "input",
+      "value": "{to_text}"
+    },
+    {
+      "description": "Select routing profile with form-specific selector.",
+      "output": null,
+      "cssSelector": "#sidebar select[name=\"routing_engines\"]",
+      "xpath": "html/body/div/div/div/form[2]/div[4]/div/select",
+      "elementTag": "select",
+      "elementHash": "25812ffaf0",
+      "type": "select_change",
+      "selectedText": "{profile}"
+    },
+    {
+      "description": "Click Go with form-specific selector to avoid multiple elements.",
+      "output": null,
+      "cssSelector": "#sidebar input[name=\"commit\"].routing_go",
+      "xpath": "html/body/div/div/div/form[2]/div[4]/div[2]/input",
+      "elementTag": "input",
+      "elementHash": "2ad0b3ddf7",
+      "type": "click"
+    },
+    {
+      "description": "Wait for route calculation to complete.",
+      "output": null,
+      "type": "wait",
+      "seconds": 5.0
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "from_text",
+      "type": "string",
+      "format": "free-text or 'lat, lon'",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "to_text",
+      "type": "string",
+      "format": "free-text or 'lat, lon'",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "profile",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "Bicycle (OSRM)",
+        "Car (OSRM)",
+        "Foot (OSRM)"
+      ]
+    },
+    {
+      "name": "step_count",
+      "type": "number",
+      "format": null,
+      "required": false,
+      "enum": null
+    }
+  ]
+}

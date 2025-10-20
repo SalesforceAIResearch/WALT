@@ -1,0 +1,134 @@
+{
+  "name": "workflow_update_product_price.v4",
+  "description": "Open a product edit page by product entity ID and update base Price, Tax Class, and Visibility, then save and verify.",
+  "version": "4.0.0",
+  "steps": [
+    {
+      "description": "Open the Magento product edit page directly by product entity ID.",
+      "output": null,
+      "type": "navigation",
+      "url": "{admin_base_url}/admin/catalog/product/edit/id/{id}/",
+      "url_operation": null
+    },
+    {
+      "description": "Wait for the product edit form to fully render.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    },
+    {
+      "description": "Focus the Price input field.",
+      "output": null,
+      "cssSelector": "input[name=\"product[price]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div/fieldset/fieldset/div/div/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "de1f6fab25",
+      "type": "click"
+    },
+    {
+      "description": "Select all text in the Price field to prepare for replacement.",
+      "output": null,
+      "cssSelector": "input[name=\"product[price]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div/fieldset/fieldset/div/div/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "de1f6fab25",
+      "type": "key_press",
+      "key": "Control+a"
+    },
+    {
+      "description": "Enter the new base price (plain number, dot as decimal separator).",
+      "output": null,
+      "cssSelector": "input[name=\"product[price]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div/fieldset/fieldset/div/div/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "de1f6fab25",
+      "type": "input",
+      "value": "{price}"
+    },
+    {
+      "description": "Set the Tax Class by visible option text.",
+      "output": null,
+      "cssSelector": "select[name=\"product[tax_class_id]\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div/fieldset/div[5]/div[2]/select",
+      "elementTag": "select",
+      "elementHash": "895bea6a1b",
+      "type": "select_change",
+      "selectedText": "{tax_class}"
+    },
+    {
+      "description": "Set the Visibility by visible option text.",
+      "output": null,
+      "cssSelector": "select[name=\"product[visibility]\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div/fieldset/div[7]/div[2]/select",
+      "elementTag": "select",
+      "elementHash": "2d6f7788e8",
+      "type": "select_change",
+      "selectedText": "{visibility}"
+    },
+    {
+      "description": "Save the product.",
+      "output": null,
+      "cssSelector": "#save-button",
+      "xpath": "html/body/div[2]/main/div/div[3]/div/div/div/button",
+      "elementTag": "button",
+      "elementHash": "6592e20a75",
+      "type": "click"
+    },
+    {
+      "description": "Wait for save to complete and page messages to render.",
+      "output": null,
+      "type": "wait",
+      "seconds": 6.0
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "admin_base_url",
+      "type": "string",
+      "format": null,
+      "description": "Base URL of the admin (protocol + host + port, no trailing slash). Example: http://3.12.136.212:7780",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "format": null,
+      "description": "Magento product entity ID used in the edit URL (e.g., 1118).",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "price",
+      "type": "string",
+      "format": null,
+      "description": "New base price to set. Use a plain numeric string with '.' as decimal separator, e.g., 63.00",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "tax_class",
+      "type": "string",
+      "format": null,
+      "description": "Visible text for the Tax Class select.",
+      "required": true,
+      "enum": [
+        "None",
+        "Taxable Goods"
+      ]
+    },
+    {
+      "name": "visibility",
+      "type": "string",
+      "format": null,
+      "description": "Visible text for the Visibility select.",
+      "required": true,
+      "enum": [
+        "Not Visible Individually",
+        "Catalog",
+        "Search",
+        "Catalog, Search"
+      ]
+    }
+  ]
+}

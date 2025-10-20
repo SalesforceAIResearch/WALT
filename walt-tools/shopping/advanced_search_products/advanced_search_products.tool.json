@@ -1,0 +1,135 @@
+{
+  "name": "advanced_product_search",
+  "description": "Runs an advanced product search on Magento: fills Product Name, SKU, Description, Short Description, Price From/To and submits. PRECONDITION: Can be called from any page. Successful outcome: Navigates to the search results page.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the Advanced Search form.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/catalogsearch/advanced/",
+      "url_operation": null
+    },
+    {
+      "description": "Enter Product Name keywords (can be empty).",
+      "output": null,
+      "cssSelector": "#name",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div/div/input",
+      "elementTag": "input",
+      "elementHash": "df3020a86b",
+      "type": "input",
+      "value": "{name}"
+    },
+    {
+      "description": "Enter SKU (can be empty).",
+      "output": null,
+      "cssSelector": "#sku",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "1349f1ca81",
+      "type": "input",
+      "value": "{sku}"
+    },
+    {
+      "description": "Enter Description keywords (can be empty).",
+      "output": null,
+      "cssSelector": "#description",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div[3]/div/input",
+      "elementTag": "input",
+      "elementHash": "bd557b736f",
+      "type": "input",
+      "value": "{description}"
+    },
+    {
+      "description": "Enter Short Description keywords (can be empty).",
+      "output": null,
+      "cssSelector": "#short_description",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div[4]/div/input",
+      "elementTag": "input",
+      "elementHash": "945ec292f7",
+      "type": "input",
+      "value": "{short_description}"
+    },
+    {
+      "description": "Enter Price From (minimum). Use numeric characters only.",
+      "output": null,
+      "cssSelector": "#price",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div[5]/div/div/div/div/input",
+      "elementTag": "input",
+      "elementHash": "e457e89369",
+      "type": "input",
+      "value": "{price_from}"
+    },
+    {
+      "description": "Enter Price To (maximum). Use numeric characters only.",
+      "output": null,
+      "cssSelector": "#price_to",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div[5]/div/div/div[2]/div/div/input",
+      "elementTag": "input",
+      "elementHash": "6ec457f69a",
+      "type": "input",
+      "value": "{price_to}"
+    },
+    {
+      "description": "Submit the Advanced Search form.",
+      "output": null,
+      "cssSelector": "button[type=\"submit\"].action.search.primary[title=\"Search\"]",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/div/div/button",
+      "elementTag": "button",
+      "elementHash": "90708cd5ce",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL with protocol (e.g., http://localhost:7770 for VWA or http://3.12.136.212:7770 for WebArena)"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "sku",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "short_description",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "price_from",
+      "type": "string",
+      "format": "numeric string",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "price_to",
+      "type": "string",
+      "format": "numeric string",
+      "required": false,
+      "enum": null
+    }
+  ]
+}

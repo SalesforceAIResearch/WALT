@@ -1,0 +1,101 @@
+{
+  "workflow_analysis": "Step Analysis: The recorded session navigates directly to the Contact page and performs deterministic interactions to fill and submit the form. Two runs show that visible indexes changed between page loads but the elementHash values for the inputs and button remained stable, confirming that elementHash is the reliable selector. After submitting, a success notice appears, indicating the form was sent.\n\nTask Definition: Build a reusable workflow to send a message via the site Contact page by filling name (optional), email (required), subject (optional), and message (required), then clicking Send.\n\nAction Plan:\n1) Navigate directly to the Contact page URL.\n2) Input yourName (optional) into the name field.\n3) Input yourEmail (required) into the email field.\n4) Input subject (optional) into the subject field.\n5) Input message (required) into the message textarea.\n6) Click the Send button to submit the form.\n\nVariable Identification:\n- base_url: Base website URL to construct contact page URL.\n- yourName: Value for the optional name field.\n- yourEmail: Required email address.\n- subject: Optional subject line.\n- message: Required message body.\n\nStep Optimization:\n- Use direct navigation to the Contact page (no intermediate clicks).\n- Use deterministic interactions via elementHash to ensure stability despite varying DOM indexes.\n- Exclude non-essential extraction/verification steps since the core task is to submit the form.\n- No agentic steps required as elements are directly interactable and stable.\n",
+  "name": "send_contact_message",
+  "description": "Open the Contact page and submit the contact form using provided values (name optional, email required, subject optional, message required).",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the Contact page directly.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/index.php?page=contact",
+      "url_operation": null
+    },
+    {
+      "description": "Fill optional Your name field (may be empty if not provided).",
+      "output": null,
+      "cssSelector": "#yourName",
+      "xpath": "html/body/section/div[3]/div/div/div[2]/form/div/div/input",
+      "elementTag": "input",
+      "elementHash": "b48dd5dd3b",
+      "type": "input",
+      "value": "{yourName}"
+    },
+    {
+      "description": "Fill required Your email address field.",
+      "output": null,
+      "cssSelector": "#yourEmail",
+      "xpath": "html/body/section/div[3]/div/div/div[2]/form/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "942480b7cf",
+      "type": "input",
+      "value": "{yourEmail}"
+    },
+    {
+      "description": "Fill optional Subject field (may be empty if not provided).",
+      "output": null,
+      "cssSelector": "#subject",
+      "xpath": "html/body/section/div[3]/div/div/div[2]/form/div[3]/div/input",
+      "elementTag": "input",
+      "elementHash": "27e4e049b0",
+      "type": "input",
+      "value": "{subject}"
+    },
+    {
+      "description": "Fill required Message textarea with the message body.",
+      "output": null,
+      "cssSelector": "#message",
+      "xpath": "html/body/section/div[3]/div/div/div[2]/form/div[4]/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "e8bdb8930d",
+      "type": "input",
+      "value": "{message}"
+    },
+    {
+      "description": "Click Send to submit the contact form.",
+      "output": null,
+      "cssSelector": "button.btn.btn-primary",
+      "xpath": "html/body/section/div[3]/div/div/div[2]/form/div[5]/div/button",
+      "elementTag": "button",
+      "elementHash": "6b7b9aeb9f",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "yourName",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "yourEmail",
+      "type": "string",
+      "format": "user@domain.com",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "subject",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

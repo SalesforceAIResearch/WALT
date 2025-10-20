@@ -1,0 +1,37 @@
+{
+  "name": "Delete listing by title (Manage my listings)",
+  "description": "Navigates to the Manage my listings page and deletes a listing whose title matches the provided text, then captures the confirmation banner and remaining listing titles. Precondition: Listing should exist. Can be called from any page. Successful outcome: Deleted listing.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open Manage my listings directly.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/index.php?page=user&action=items",
+      "url_operation": null
+    },
+    {
+      "description": "Locate the listing with the exact title and trigger its Delete action. If a confirmation prompt appears, confirm it.",
+      "output": null,
+      "type": "agent",
+      "task": "On the Manage my listings page (could span multiple pages), find the listing whose title matches \"{item_title}\" and click its Delete/Del action to delete it. Confirm any prompt if shown.",
+      "max_steps": 6
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "item_title",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

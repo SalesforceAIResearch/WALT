@@ -1,0 +1,105 @@
+{  
+  "name": "workflow_list_project_issues_with_filters.v1",
+  "description": "Opens a project's Issues list, applies issue state and sort via URL parameters (and briefly interacts with the tabs/sort UI), optionally filters by a search query.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the project Issues list.",
+      "output": null,
+      "type": "navigation",
+      "url": "{issues_url}",
+      "url_operation": null
+    },        
+    {
+      "description": "Apply desired issue state and sorting deterministically via URL parameters.",
+      "output": null,
+      "type": "navigation",
+      "url": null,
+      "url_operation": {
+        "base": "{current_url}",
+        "replace": {
+          "state": "{state}",
+          "sort": "{sort}",
+          "first_page_size": "{first_page_size}"
+        }
+      }
+    },
+    {
+      "description": "Restore the requested state via URL so the workflow ends on the desired tab.",
+      "output": null,
+      "type": "navigation",
+      "url": null,
+      "url_operation": {
+        "base": "{current_url}",
+        "replace": {
+          "state": "{state}"
+        }
+      }
+    },    
+    {
+      "description": "Enter search text (leave empty to clear).",
+      "output": null,
+      "cssSelector": "input[placeholder=\"Search or filter results...\"][aria-label=\"Search or filter results...\"]",
+      "xpath": "html/body/div[3]/div/div[3]/main/div[3]/div/div[2]/div/div[2]/div/div/input",
+      "elementTag": "input",
+      "elementHash": "1d6932fdf2",
+      "type": "input",
+      "value": "{search_query}"
+    },
+    {
+      "description": "Submit the search query.",
+      "output": null,
+      "cssSelector": "input[placeholder=\"Search or filter results...\"][aria-label=\"Search or filter results...\"]",
+      "xpath": "html/body/div[3]/div/div[3]/main/div[3]/div/div[2]/div/div[2]/div/div/input",
+      "elementTag": "input",
+      "elementHash": "1d6932fdf2",
+      "type": "key_press",
+      "key": "Enter"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "issues_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "state",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "opened",
+        "closed",
+        "all"
+      ]
+    },
+    {
+      "name": "sort",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "created_date",
+        "updated_desc",
+        "updated_asc"
+      ]
+    },
+    {
+      "name": "first_page_size",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "search_query",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "name": "workflow_update_order_status_comments_history.v4",
+  "description": "Open order view by internal order_id and update the order status via the Information > Notes for this Order (Comments History) form. Optionally add a comment, notify the customer, and make the comment visible on the storefront.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the order view directly by internal order_id (skips grid filtering).",
+      "output": null,
+      "type": "navigation",
+      "url": "{admin_base_url}/sales/order/view/order_id/{order_id}/",
+      "url_operation": null
+    },
+    {
+      "description": "Wait for the order view to fully render and any loading mask to clear.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    },
+    {
+      "description": "Ensure the Information tab is active (the editable Notes for this Order form lives here).",
+      "output": null,
+      "cssSelector": "a[href='#sales_order_view_tabs_order_info_content']",
+      "xpath": null,
+      "elementTag": null,
+      "elementHash": null,
+      "type": "click"
+    },
+    {
+      "description": "Scroll down to bring the Notes for this Order form into view.",
+      "output": null,
+      "type": "scroll",
+      "scrollX": 0,
+      "scrollY": 600
+    },
+    {
+      "description": "Wait to ensure the form controls (including status options) are initialized.",
+      "output": null,
+      "type": "wait",
+      "seconds": 1.0
+    },
+    {
+      "description": "Select the desired order status by visible text in the Comments History status select.",
+      "output": null,
+      "cssSelector": "#history_status",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div/section[5]/div[2]/div/div[2]/div/div/div/select",
+      "elementTag": "select",
+      "elementHash": "a29f177603",
+      "type": "select_change",
+      "selectedText": "{history_status}"
+    },
+    {
+      "description": "Enter the comment to be recorded with the status change. Leave empty to post no text.",
+      "output": null,
+      "cssSelector": "#history_comment",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div/section[5]/div[2]/div/div[2]/div/div[2]/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "fcc90341f4",
+      "type": "input",
+      "value": "{history_comment}"
+    },
+    {
+      "description": "Set Notify Customer by Email to the desired boolean. Use selector #history_notify or input[name='history[is_customer_notified]'].",
+      "output": null,
+      "type": "agent",
+      "task": "Ensure checkbox #history_notify is set to {history_is_customer_notified}. If current state differs, click it to match the target.",
+      "max_steps": 4
+    },
+    {
+      "description": "Set Visible on Storefront to the desired boolean. Use selector #history_visible or input[name='history[is_visible_on_front]'].",
+      "output": null,
+      "type": "agent",
+      "task": "Ensure checkbox #history_visible is set to {history_is_visible_on_front}. If current state differs, click it to match the target.",
+      "max_steps": 4
+    },
+    {
+      "description": "Submit the status/comment change.",
+      "output": null,
+      "cssSelector": "#id_BaYHNLADLw4QMbqSVc31UqFrhiOxkG5l",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div/section[5]/div[2]/div/div[2]/div/div[3]/div[2]/button",
+      "elementTag": "button",
+      "elementHash": "c22d6b6ad1",
+      "type": "click"
+    },
+    {
+      "description": "Wait for submission to complete and the history list to update.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "admin_base_url",
+      "type": "string",
+      "format": null,
+      "description": "Admin base URL including the admin frontName (e.g., http://3.12.136.212:7780/admin). Do not include a trailing slash at the end beyond /admin.",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "order_id",
+      "type": "string",
+      "format": null,
+      "description": "Internal numeric order ID used in the view URL (e.g., 125).",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "history_status",
+      "type": "string",
+      "format": null,
+      "description": "Visible text of the status to select in the Comments History status dropdown (e.g., 'Processing', 'Suspected Fraud'). Must match option text exactly.",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "history_comment",
+      "type": "string",
+      "format": null,
+      "description": "Comment text to add in the Notes for this Order form. Leave blank to add no comment text.",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "history_is_customer_notified",
+      "type": "bool",
+      "format": null,
+      "description": "Set 'Notify Customer by Email' checkbox to this value before submitting.",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "history_is_visible_on_front",
+      "type": "bool",
+      "format": null,
+      "description": "Set 'Visible on Storefront' checkbox to this value before submitting.",
+      "required": false,
+      "enum": null
+    }
+  ]
+}

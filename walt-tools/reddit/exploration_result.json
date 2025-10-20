@@ -1,0 +1,307 @@
+{
+    "workflows": [
+        {
+            "name": "search_site",
+            "start_url": "http://localhost:9999/",
+            "description": "Perform a site-wide search using user-provided query and optional scope filters (e.g., content type). Accepts parameters: query (string), scope (optional: 'all'|'submissions'|'comments'|'forums'|'wiki'), page (optional integer), sort (optional string). Returns a list of matching items with metadata and links.",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter user-provided search terms",
+                    "selector_hint": "search input (visible on /) index 6"
+                },
+                {
+                    "type": "button",
+                    "purpose": "submit search / trigger search request",
+                    "selector_hint": "press Enter or search control"
+                },
+                {
+                    "type": "select",
+                    "purpose": "optional content scope filter",
+                    "options": [
+                        "all",
+                        "submissions",
+                        "comments",
+                        "forums",
+                        "wiki"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "sort results",
+                    "options": [
+                        "relevance",
+                        "new",
+                        "top",
+                        "hot"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "refine_search_results",
+            "start_url": "http://localhost:9999/search?q=test",
+            "description": "Refine or paginate an existing search results page. Parameters: q (string), page (int), sort (string), filters (map). Works from an active results page.",
+            "elements": [
+                {
+                    "type": "controls",
+                    "purpose": "result filters visible on results pages (facets, content-type filters)",
+                    "notes": "openable filter panels and sort menus"
+                },
+                {
+                    "type": "select",
+                    "purpose": "sort results",
+                    "options": [
+                        "Hot",
+                        "New",
+                        "Top",
+                        "Active"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "browse_forums",
+            "start_url": "http://localhost:9999/forums",
+            "description": "List and discover forums. Parameters: page (int), sort (optional: 'popular'|'new'|'subscribed'|'featured'), query (optional). Returns forum cards with metadata and subscribe controls.",
+            "elements": [
+                {
+                    "type": "list",
+                    "purpose": "forum cards/links to open a forum; each card contains title, subscriber count, description"
+                },
+                {
+                    "type": "button",
+                    "purpose": "subscribe/unsubscribe directly from the directory",
+                    "notes": "subscribe buttons present next to forum entries"
+                },
+                {
+                    "type": "select",
+                    "purpose": "directory sort/filter",
+                    "options": [
+                        "Popular",
+                        "New",
+                        "Subscribed",
+                        "Featured"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "view_forum",
+            "start_url": "http://localhost:9999/f/AskReddit",
+            "description": "Open a forum to browse its submissions and forum-level metadata. Parameters: forum_name (string), page (int), sort (optional). Returns submissions listing, sidebar info, and forum controls.",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "subscribe/unsubscribe to this forum",
+                    "selector_hint": "sidebar subscribe toggle (index 23)",
+                    "options": [
+                        "Subscribe",
+                        "Unsubscribe"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "sort forum submissions",
+                    "options": [
+                        "Hot",
+                        "New",
+                        "Top",
+                        "Active"
+                    ],
+                    "selector_hint": "forum sort control (index 12)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "open Submit page scoped to this forum",
+                    "selector_hint": "Submit link (index 8)"
+                },
+                {
+                    "type": "list",
+                    "purpose": "submissions list with per-item controls: vote, comments, save"
+                }
+            ]
+        },
+        {
+            "name": "subscribe_forum",
+            "start_url": "http://localhost:9999/f/AskReddit",
+            "description": "Toggle subscription to a forum. Parameters: forum_name (string), action (string: 'subscribe'|'unsubscribe'). Starts from the forum page or directory listing.",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "toggle subscribe state",
+                    "selector_hint": "sidebar subscribe button (index 23)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "RSS subscription link",
+                    "selector_hint": "Subscribe via RSS (index 24)"
+                }
+            ]
+        },
+        {
+            "name": "create_submission",
+            "start_url": "http://localhost:9999/submit/AskReddit",
+            "description": "Create a new submission in a forum. Parameters: forum_name (string), type (string: 'text'|'link'|'image'), title (string), body (string, optional), url (optional), nsfw (bool, optional), spoiler (bool, optional), flair (optional). Returns the new submission resource URL.",
+            "elements": [
+                {
+                    "type": "select",
+                    "purpose": "forum selector (start target forum is preselected)",
+                    "notes": "Submit page scoped to AskReddit"
+                },
+                {
+                    "type": "input",
+                    "purpose": "title field",
+                    "selector_hint": "title input (index 14)"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "body / markdown editor",
+                    "selector_hint": "body textarea (index 16)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "create submission",
+                    "selector_hint": "Create submission button (index 21)"
+                },
+                {
+                    "type": "toggle",
+                    "purpose": "select text vs url submission (if available)"
+                }
+            ]
+        },
+        {
+            "name": "view_submission",
+            "start_url": "http://localhost:9999/f/AskReddit/2/test-submission-from-automation",
+            "description": "Open a submission detail page to read content and access interactions. Parameters: submission_id or full URL. Returns title, body, metadata, vote counts, comments, and controls.",
+            "elements": [
+                {
+                    "type": "text",
+                    "purpose": "title and body display",
+                    "selector_hint": "title link and body text visible on page"
+                },
+                {
+                    "type": "button",
+                    "purpose": "upvote/retract upvote",
+                    "selector_hint": "Retract upvote (index 17)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "downvote",
+                    "selector_hint": "Downvote (index 18)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "edit submission",
+                    "selector_hint": "Edit link (index 15)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "delete submission",
+                    "selector_hint": "Delete button (index 16)"
+                },
+                {
+                    "type": "text",
+                    "purpose": "short URL and shareable link",
+                    "selector_hint": "Short URL shown on the sidebar"
+                },
+                {
+                    "type": "area",
+                    "purpose": "comments area showing threaded comments and a top-level comment composer"
+                }
+            ]
+        },
+        {
+            "name": "edit_submission",
+            "start_url": "http://localhost:9999/f/AskReddit/2/test-submission-from-automation",
+            "description": "Edit an existing submission's editable fields. Parameters: submission_id (or url), new_title (optional), new_body (optional), new_flair (optional). Returns updated submission resource.",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open edit form",
+                    "selector_hint": "Edit link on submission page (index 15)"
+                },
+                {
+                    "type": "input",
+                    "purpose": "title field in edit form"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "body editor in edit form"
+                },
+                {
+                    "type": "button",
+                    "purpose": "save changes"
+                }
+            ]
+        },
+        {
+            "name": "delete_submission",
+            "start_url": "http://localhost:9999/f/AskReddit/2/test-submission-from-automation",
+            "description": "Initiate deletion of a submission. Parameters: submission_id; action: 'delete' (confirmation step is expected). From the submission page, triggers a confirmation dialog and removes the submission on confirm.",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "delete submission",
+                    "selector_hint": "Delete button (index 16)"
+                },
+                {
+                    "type": "dialog",
+                    "purpose": "confirm deletion",
+                    "notes": "confirmation dialog may appear \u2014 cancel allowed"
+                }
+            ]
+        },
+        {
+            "name": "vote_submission",
+            "start_url": "http://localhost:9999/f/AskReddit/2/test-submission-from-automation",
+            "description": "Apply an upvote/downvote or remove existing vote on a submission. Parameters: submission_id, vote (1|0|-1). Returns updated vote count/state.",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "upvote or retract upvote",
+                    "selector_hint": "Retract upvote/upvote control (index 17)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "downvote",
+                    "selector_hint": "Downvote (index 18)"
+                }
+            ]
+        },
+        {
+            "name": "post_comment",
+            "start_url": "http://localhost:9999/f/AskReddit/2/test-submission-from-automation",
+            "description": "Post a top-level comment on a submission. Parameters: submission_id, body (string, markdown allowed), reply_to (optional comment id). Returns the created comment resource.",
+            "elements": [
+                {
+                    "type": "textarea",
+                    "purpose": "enter comment body (markdown allowed)",
+                    "selector_hint": "comment textarea (index 19)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "submit comment",
+                    "selector_hint": "Post button (index 21)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "Formatting help",
+                    "selector_hint": "Formatting help link (index 20)"
+                }
+            ]
+        },
+        {
+            "name": "rss_subscribe_forum",
+            "start_url": "http://localhost:9999/f/AskReddit/2/test-submission-from-automation",
+            "description": "Obtain an RSS feed link for the forum to subscribe externally. Parameters: forum_name. Returns RSS feed URL.",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "RSS feed link for forum",
+                    "selector_hint": "Subscribe via RSS (index 24)"
+                }
+            ]
+        }
+    ]
+}

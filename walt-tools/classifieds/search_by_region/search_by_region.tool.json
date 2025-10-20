@@ -1,0 +1,43 @@
+{
+  "name": "osclass-filter-by-region",
+  "description": "Returns results for user-provided search query filtered by a user-specified region (US state). Precondition: None (Can be called from any page). Successful outcome: Navigation to page with filtered search results.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open search results for the given keyword (sPattern).",
+      "output": null,
+      "type": "navigation",
+      "url": "http://localhost:9980/index.php?page=search&sPattern={sPattern}",
+      "url_operation": null
+    },
+    {
+      "description": "Apply the region filter by adding sRegion (US state) to the current search URL (GET).",
+      "output": null,
+      "type": "navigation",
+      "url": null,
+      "url_operation": {
+        "base": "{current_url}",
+        "replace": {
+          "sRegion": "{sRegion}"
+        }
+      }
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "sPattern",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "sRegion",
+      "type": "string",
+      "format": null,
+      "description": "Pick a valid US state",
+      "required": true,
+      "enum": null
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{  
+  "name": "workflow_search_products.v2",
+  "description": "Search and filter Products grid",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Go to the Magento Products grid.",
+      "output": null,
+      "type": "navigation",
+      "url": "http://3.12.136.212:7780/admin/catalog/product/",
+      "url_operation": null
+    },
+    {
+      "description": "Enter global search text into the grid search field.",
+      "output": null,
+      "cssSelector": ".data-grid-search-control-wrap input#fulltext",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/input",
+      "elementTag": "input",
+      "elementHash": "4e641cc4c6",
+      "type": "input",
+      "value": "{fulltext}"
+    },
+    {
+      "description": "Submit the global Search.",
+      "output": null,
+      "cssSelector": ".data-grid-search-control-wrap button[aria-label=\"Search\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/button",
+      "elementTag": "button",
+      "elementHash": "341036eef5",
+      "type": "click"
+    },
+    {
+      "description": "Wait for grid to refresh after search.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    },
+    {
+      "description": "Open the Filters panel with fallback selectors.",
+      "output": null,
+      "cssSelector": "button[data-action='grid-filter-expand']:not([aria-label='product-filters'])",
+      "xpath": null,
+      "elementTag": null,
+      "elementHash": null,
+      "type": "click"
+    },
+    {
+      "description": "Wait for filter panel to open.",
+      "output": null,
+      "type": "wait",
+      "seconds": 1.5
+    },
+    {
+      "description": "Set filter Type with fallback selectors.",
+      "output": null,
+      "cssSelector": "select[name='type_id']",
+      "xpath": null,
+      "elementTag": null,
+      "elementHash": null,
+      "type": "select_change",
+      "selectedText": "{type_label}"
+    },
+    {
+      "description": "Set filter Status to the provided visible option.",
+      "output": null,
+      "cssSelector": "select[name='status']",
+      "xpath": null,
+      "elementTag": null,
+      "elementHash": null,
+      "type": "select_change",
+      "selectedText": "{status_label}"
+    },
+    {
+      "description": "Apply the Filters.",
+      "output": null,
+      "cssSelector": "button[data-action='grid-filter-apply']",
+      "xpath": null,
+      "elementTag": null,
+      "elementHash": null,
+      "type": "click"
+    },
+    {
+      "description": "Wait for grid to refresh after applying filters.",
+      "output": null,
+      "type": "wait",
+      "seconds": 1.0
+    }    
+  ],
+  "input_schema": [
+    {
+      "name": "fulltext",
+      "type": "string",
+      "format": null,
+      "description": "Global Products grid search query (field name 'fulltext').",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "type_label",
+      "type": "string",
+      "format": null,
+      "description": "Visible text for the 'Type' filter select (Filters panel).",
+      "required": true,
+      "enum": [
+        "Simple Product",
+        "Virtual Product",
+        "Bundle Product",
+        "Downloadable Product",
+        "Configurable Product",
+        "Grouped Product"
+      ]
+    },
+    {
+      "name": "status_label",
+      "type": "string",
+      "format": null,
+      "description": "Visible text for the 'Status' filter select (Filters panel).",
+      "required": true,
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    }
+  ]
+}

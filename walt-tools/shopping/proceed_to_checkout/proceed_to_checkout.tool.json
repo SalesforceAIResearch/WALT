@@ -1,0 +1,51 @@
+{
+  "name": "Checkout to Review & Payments",
+  "description": "Navigates to cart, starts checkout and proceeds to Review & Payments (does NOT place order). PRECONDITION: User is logged in and cart must have at least one item. Successful outcome: The checkout is performed and the Review & Payments step is reached.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the Shopping Cart directly (avoids flaky minicart interactions).",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/checkout/cart/",
+      "url_operation": null
+    },
+    {
+      "description": "Wait for cart to load and verify it has items before proceeding with checkout.",
+      "type": "agent",
+      "task": "Check if the shopping cart has items. Look for cart items, product listings, or a checkout button. If the cart is empty (shows 'You have no items in your shopping cart', 'Your cart is empty', or no checkout button is visible), immediately fail this step with a clear message that the cart is empty and checkout cannot proceed.",
+      "max_steps": 2
+    },
+    {
+      "description": "Click Proceed to Checkout on the cart page.",
+      "output": null,
+      "cssSelector": "button[data-role=\"proceed-to-checkout\"]",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[2]/div/ul/li/button",
+      "elementTag": "button",
+      "elementHash": "b36ee1edcd",
+      "type": "click"
+    },
+    {
+      "description": "Wait for checkout page to load completely.",
+      "type": "wait",
+      "seconds": 2
+    },
+    {
+      "description": "The first address will be selected by default. Find the next button and click it.",
+      "type": "click",
+      "cssSelector": "button[data-role=\"opc-continue\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div[4]/ol/li[2]/div/div[3]/form/div[3]/div/button",
+      "elementTag": "button",
+      "elementHash": "86cc888c40"
+    }    
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }    
+  ]
+}

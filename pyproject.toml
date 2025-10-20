@@ -1,0 +1,114 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "walt"
+version = "0.1.0"
+description = "Web Agents that Learn Tools - Automatic tool discovery from websites"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Viraj Prabhu", email = "viraj.prabhu@salesforce.com"}
+]
+keywords = ["web-agents", "llm", "automation", "tool-discovery", "browser-use"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "playwright>=1.40.0",
+    "patchright>=1.0.0",
+    "langchain>=0.1.0",
+    "langchain-openai>=0.0.5",
+    "langchain-anthropic>=0.1.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "aiofiles>=23.0.0",
+    "python-dotenv>=1.0.0",
+    "markdownify>=0.11.0",
+    "requests>=2.31.0",
+    "numpy>=1.24.0",
+    "sentence-transformers>=2.2.0",
+    "pyyaml>=6.0.0",
+    "faiss-cpu>=1.7.4",
+    "posthog>=3.0.0",
+    "beautifulsoup4>=4.9.0",
+    "lxml>=4.9.0",
+    "boto3>=1.28.0",
+    "langchain-google-genai>=2.1.12",
+    "langchain-aws>=0.2.35",
+    "ffmpy==0.6.3",
+    "langchain_community>=0.3.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    # Testing
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    # Code quality
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+    # Benchmarking
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "pillow>=10.0.0",
+    "nltk>=3.8.0",
+    "evaluate>=0.4.0",
+    "beartype>=0.22.2",
+    "aiolimiter>=1.0.0",
+    "cachetools>=5.0.0",
+    "tqdm>=4.65.0",
+    "openai>=1.0.0",
+    "scikit-image>=0.25.2",
+    "absl-py>=1.0.0",
+    "rouge-score>=0.1.2",
+]
+recorder = [
+    "uvicorn>=0.24.0",
+    "fastapi>=0.104.0",
+]
+all = [
+    "walt[dev,recorder]",
+]
+
+[project.scripts]
+walt = "walt.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/salesforceairesearch/walt"
+Documentation = "https://github.com/salesforceairesearch/walt#readme"
+Repository = "https://github.com/salesforceairesearch/walt"
+Issues = "https://github.com/salesforceairesearch/walt/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["walt*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false

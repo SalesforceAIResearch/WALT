@@ -1,0 +1,89 @@
+{
+  "name": "category_browse_refine_sort_paginate",
+  "description": "Navigate to a category listing URL and apply layered navigation filters, sorting, view mode, page size, and pagination via URL parameters. PRECONDITION: Can be called from any page. Successful outcome: Navigates to the category page with the applied filters and pagination.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the base category URL to start browsing.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}",
+      "url_operation": null
+    },
+    {
+      "description": "Apply filters, sorting, view, page size, and pagination by manipulating URL query parameters.",
+      "output": null,
+      "type": "navigation",
+      "url": null,
+      "url_operation": {
+        "base": "{current_url}",
+        "replace": {
+          "cat": "{cat}",
+          "price": "{price}",
+          "product_list_order": "{product_list_order}",
+          "product_list_mode": "{product_list_mode}",
+          "product_list_limit": "{product_list_limit}",
+          "p": "{p}"
+        }
+      }
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "cat",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "price",
+      "type": "string",
+      "format": "min-max",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "product_list_order",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "position",
+        "name",
+        "price"
+      ]
+    },
+    {
+      "name": "product_list_mode",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "grid",
+        "list"
+      ]
+    },
+    {
+      "name": "product_list_limit",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "p",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    }
+  ]
+}

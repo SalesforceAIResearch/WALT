@@ -1,0 +1,258 @@
+{
+  "name": "edit_listing_update_all_fields",
+  "description": "Open an Osclass listing edit page and update category, title, description, price/currency, delete existing image, set location (region/city/area/address), set contact (phone, show phone, other contact), optionally upload images via dropzone, and save. Precondition: Listing should exist. Can be called from any page. Successful outcome: Updated listing.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the listing edit page for the specified item ID.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/index.php?page=item&action=item_edit&id={item_id}",
+      "url_operation": null
+    },
+    {
+      "description": "Set listing Category by visible option text.",
+      "output": null,
+      "cssSelector": "#catId",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div/div/select",
+      "elementTag": "select",
+      "elementHash": "088d3b02e8",
+      "type": "select_change",
+      "selectedText": "{category}"
+    },
+    {
+      "description": "Update the Title field.",
+      "output": null,
+      "cssSelector": "#titleen_US",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "1c6a31d7b5",
+      "type": "input",
+      "value": "{title}"
+    },
+    {
+      "description": "Update the Description textarea.",
+      "output": null,
+      "cssSelector": "#descriptionen_US",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[3]/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "47c4444200",
+      "type": "input",
+      "value": "{description}"
+    },
+    {
+      "description": "Set the Price amount.",
+      "output": null,
+      "cssSelector": "#price",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[4]/div/input",
+      "elementTag": "input",
+      "elementHash": "e457e89369",
+      "type": "input",
+      "value": "{price}"
+    },
+    {
+      "description": "Set the currency symbol for price (visible text).",
+      "output": null,
+      "cssSelector": "#currency",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[4]/div/select",
+      "elementTag": "select",
+      "elementHash": "0f327d007e",
+      "type": "select_change",
+      "selectedText": "{currency_symbol}"
+    },
+    {
+      "description": "Select Region (US state).",
+      "output": null,
+      "cssSelector": "#regionId",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[6]/div/div/select",
+      "elementTag": "select",
+      "elementHash": "6e0b45d0bb",
+      "type": "select_change",
+      "selectedText": "{region}"
+    },
+    {
+      "description": "Select City (visible text).",
+      "output": null,
+      "cssSelector": "#cityId",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[6]/div[2]/div/select",
+      "elementTag": "select",
+      "elementHash": "11ce414af8",
+      "type": "select_change",
+      "selectedText": "{city}"
+    },
+    {
+      "description": "Enter City Area/neighborhood (optional).",
+      "output": null,
+      "cssSelector": "#cityArea",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[6]/div[3]/div/input",
+      "elementTag": "input",
+      "elementHash": "7c4e757edc",
+      "type": "input",
+      "value": "{city_area}"
+    },
+    {
+      "description": "Enter street Address (optional).",
+      "output": null,
+      "cssSelector": "#address",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[6]/div[4]/div/input",
+      "elementTag": "input",
+      "elementHash": "e410a7547a",
+      "type": "input",
+      "value": "{address}"
+    },
+    {
+      "description": "Enter Phone number (optional).",
+      "output": null,
+      "cssSelector": "#contactPhone",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[7]/div/div/input",
+      "elementTag": "input",
+      "elementHash": "3639ecbe5d",
+      "type": "input",
+      "value": "{phone}"
+    },
+    {
+      "description": "Checkbox state may vary; use reasoning to verify and set the desired state without double-toggling.",
+      "output": null,
+      "type": "agent",
+      "task": "Ensure the 'Show phone on the listing page' checkbox matches {show_phone}; identify by its label and/or element hash da4672aed9 and click to toggle only if needed.",
+      "max_steps": 4
+    },
+    {
+      "description": "Enter Other contact info (optional).",
+      "output": null,
+      "cssSelector": "#contactOther",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[7]/div[3]/div/input",
+      "elementTag": "input",
+      "elementHash": "a23b650904",
+      "type": "input",
+      "value": "{other_contact}"
+    },
+    {
+      "description": "The uploader uses a hidden input and a dropzone area. Parse {images_csv} (comma-separated absolute file paths), click the dropzone to open the file picker or use the hidden input, upload files, and wait for processing text to disappear.",
+      "output": null,
+      "type": "agent",
+      "task": "Upload images listed in {images_csv} to the 'Click or Drop for upload images' dropzone on the edit page.",
+      "max_steps": 6
+    },
+    {
+      "description": "Save all changes by clicking the Update button.",
+      "output": null,
+      "cssSelector": "button.btn.btn-primary",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[9]/div/button",
+      "elementTag": "button",
+      "elementHash": "6b7b9aeb9f",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "item_id",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "price",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "currency_symbol",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "$",
+        "\u20ac",
+        "\u00a3"
+      ]
+    },
+    {
+      "name": "region",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "city",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "city_area",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "address",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "phone",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "show_phone",
+      "type": "bool",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "other_contact",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "images_csv",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    }
+  ]
+}

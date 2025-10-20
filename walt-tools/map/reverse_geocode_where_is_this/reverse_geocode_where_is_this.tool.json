@@ -1,0 +1,59 @@
+{  
+  "name": "workflow_reverse_geocode_where_is_this",
+  "description": "Reverse-geocode the current map center via 'Where is this?' and load search results.",
+  "version": "v2",
+  "steps": [
+    {
+      "description": "Open the history map at the specified zoom/lat/lon",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/history#map={zoom}/{lat}/{lon}",
+      "url_operation": null
+    },
+    {
+      "description": "Trigger reverse geocoding via 'Where is this?'",
+      "output": null,
+      "cssSelector": "a[title=\"Describe the current location using the search engine\"]",
+      "xpath": "html/body/div/div/div/form/div/div/div/div/a",
+      "elementTag": "a",
+      "elementHash": "cbaa0ff37c",
+      "type": "click"
+    },
+    {
+      "description": "Allow the search results page to load",
+      "output": null,
+      "type": "wait",
+      "seconds": 1.0
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "zoom",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "lat",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "lon",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

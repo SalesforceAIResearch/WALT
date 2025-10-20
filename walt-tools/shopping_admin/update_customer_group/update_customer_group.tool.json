@@ -1,0 +1,64 @@
+{
+  "name": "workflow_update_customer_group.v3",
+  "description": "Open a customer by numeric admin ID and update their Customer Group to the provided value, then save.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Navigate directly to the Customer Edit page for the given customer ID.",
+      "output": null,
+      "type": "navigation",
+      "url": "http://3.12.136.212:7780/admin/customer/index/edit/id/{customer_id}/",
+      "url_operation": null
+    },
+    {
+      "description": "Open the Account Information tab to expose editable fields including Group.",
+      "output": null,
+      "cssSelector": "#tab_customer",
+      "xpath": "html/body/div[3]/main/div[2]/div[2]/div/div/ul/li[2]/a",
+      "elementTag": "a",
+      "elementHash": "7d708d6d67",
+      "type": "click"
+    },
+    {
+      "description": "Set the Group dropdown to the desired customer group.",
+      "output": null,
+      "cssSelector": "select[name=\"customer[group_id]\"]",
+      "xpath": "html/body/div[3]/main/div[2]/div/div/div/div[2]/div[2]/div/div[2]/fieldset/fieldset/div/div/div[2]/select",
+      "elementTag": "select",
+      "elementHash": "b0b3a94878",
+      "type": "select_change",
+      "selectedText": "{group_label}"
+    },
+    {
+      "description": "Save Customer to persist the group change.",
+      "output": null,
+      "cssSelector": "#save",
+      "xpath": "html/body/div[3]/main/div/div[2]/div/div/button[9]",
+      "elementTag": "button",
+      "elementHash": "4c6c3ab294",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "customer_id",
+      "type": "string",
+      "format": null,
+      "description": "Customer entity ID used in the admin edit URL (numeric string). Example: 33",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "group_label",
+      "type": "string",
+      "format": null,
+      "description": "Visible text of the option in Account Information > Group select.",
+      "required": true,
+      "enum": [
+        "General",
+        "Retailer",
+        "Wholesale"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "name": "Share listing via send-to-friend",
+  "description": "Shares a listing by opening the site's send-to-a-friend page, filling friend details and message, and submitting. Precondition: Listing should exist. Can be called from any page. Successful outcome: Shared listing.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the target item page.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/index.php?page=item&id={id}",
+      "url_operation": null
+    },
+    {
+      "description": "Open the Share (send to a friend) page for this item (optimized: direct URL instead of clicking).",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/index.php?page=item&action=send_friend&id={id}",
+      "url_operation": null
+    },
+    {
+      "description": "Enter your friend's name.",
+      "output": null,
+      "cssSelector": "#friendName",
+      "xpath": "html/body/section/div[3]/div/div/div[2]/form/div/div/input",
+      "elementTag": "input",
+      "elementHash": "ee2c5b6920",
+      "type": "input",
+      "value": "{friend_name}"
+    },
+    {
+      "description": "Enter your friend's e-mail address.",
+      "output": null,
+      "cssSelector": "#friendEmail",
+      "xpath": "html/body/section/div[3]/div/div/div[2]/form/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "4da3057832",
+      "type": "input",
+      "value": "{friend_email}"
+    },
+    {
+      "description": "Enter the message to include with the shared listing.",
+      "output": null,
+      "cssSelector": "#message",
+      "xpath": "html/body/section/div[3]/div/div/div[2]/form/div[4]/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "e8bdb8930d",
+      "type": "input",
+      "value": "{message}"
+    },
+    {
+      "description": "Submit the send-to-friend form.",
+      "output": null,
+      "cssSelector": "button.btn.btn-primary",
+      "xpath": "html/body/section/div[3]/div/div/div[2]/form/div[5]/div/button",
+      "elementTag": "button",
+      "elementHash": "6b7b9aeb9f",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "friend_name",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "friend_email",
+      "type": "string",
+      "format": "email",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "message",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

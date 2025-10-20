@@ -1,0 +1,99 @@
+{
+  "name": "workflow_search_catalog_header.v2",
+  "description": "Search the catalog from the global header, then set Sort By and page size on the results page using deterministic selectors. PRECONDITION: Can be called from any page. Successful outcome: The search is performed and the results are sorted and paginated.",
+  "version": "2.0.0",
+  "steps": [
+    {
+      "description": "Open storefront homepage.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/",
+      "url_operation": null
+    },
+    {
+      "description": "Type the search query into the global header search input (name='q').",
+      "output": null,
+      "cssSelector": "#search",
+      "xpath": "html/body/div[2]/header/div[2]/div[2]/div[2]/form/div/div/input",
+      "elementTag": "input",
+      "elementHash": "aecc25bcc0",
+      "type": "input",
+      "value": "{q}"
+    },
+    {
+      "description": "Submit search by pressing Enter on the header search input.",
+      "output": null,
+      "cssSelector": "#search",
+      "xpath": "html/body/div[2]/header/div[2]/div[2]/div[2]/form/div/div/input",
+      "elementTag": "input",
+      "elementHash": "aecc25bcc0",
+      "type": "key_press",
+      "key": "Enter"
+    },
+    {
+      "description": "Wait for search results to load.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    },
+    {
+      "description": "Set Sort By with fallback selectors.",
+      "output": null,
+      "cssSelector": "#sorter",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[2]/div/div[2]/select",
+      "elementTag": "select",
+      "elementHash": "69b295e2f9",
+      "type": "select_change",
+      "selectedText": "{product_list_order}"
+    },
+    {
+      "description": "Set page limit with fallback selectors.",
+      "output": null,
+      "cssSelector": "#limiter",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[2]/div[3]/div[2]/div/select",
+      "elementTag": "select",
+      "elementHash": "e4effc86fc",
+      "type": "select_change",
+      "selectedText": "{product_list_limit}"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL with protocol (e.g., http://localhost:7770 for VWA or http://3.12.136.212:7770 for WebArena)"
+    },
+    {
+      "name": "q",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "product_list_order",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "Product Name",
+        "Price",
+        "Relevance"
+      ]
+    },
+    {
+      "name": "product_list_limit",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "12",
+        "24",
+        "36"
+      ]
+    }
+  ]
+}

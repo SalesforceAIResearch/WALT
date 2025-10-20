@@ -1,0 +1,46 @@
+# VisualWebArena Baseline Evaluation
+# This config represents a baseline evaluation run for VWA benchmarks
+# Usage: python src/walt/benchmarks/vwa/aeval.py --config experiment_configs/vwa_baseline.yaml
+
+name: "VWA Baseline - Classifieds"
+description: "Baseline evaluation on VWA classifieds domain without tools"
+
+tags:
+  - vwa
+  - baseline
+  - classifieds
+
+llm:
+  agent_model: gpt-5-mini
+  planner_model: gpt-5-mini
+  temperature: 0.0
+
+agent:
+  max_steps: 30
+  use_stealth: false
+  use_vision: true
+  max_actions_per_step: 10
+
+benchmark:
+  type: vwa
+  website: classifieds
+  task_list: src/walt/benchmarks/vwa/test_configs/visualwebarena/test_classifieds_v2/tasks.json
+  reset_environment: false
+  authenticate: true
+  generate_test_data: true
+
+execution:
+  parallel: 16
+  save_traces: true
+  save_screenshots: false
+
+output:
+  dir: outputs/vwa-classifieds-baseline
+  log_level: INFO
+  generate_report: true
+  save_raw_results: true
+
+notes: |
+  Baseline evaluation without tools for the VWA classifieds domain.
+  Uses gpt-5-mini with 50 max steps and stealth mode enabled.
+

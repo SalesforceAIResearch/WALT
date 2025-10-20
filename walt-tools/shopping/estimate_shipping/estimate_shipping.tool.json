@@ -1,0 +1,93 @@
+{
+  "name": "workflow_estimate_shipping.v6",
+  "description": "Estimate shipping by expanding estimator, setting country/region/postcode, and selecting a shipping method (Flat Rate) on the cart page. PRECONDITION: Can be called from any page. Successful outcome: Displays the shipping method and amount in the order summary.",
+  "version": "1.0",
+  "steps": [
+    {
+      "description": "Open the Shopping Cart page.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/checkout/cart/",
+      "url_operation": null
+    },
+    {
+      "description": "Expand the 'Estimate Shipping and Tax' panel.",
+      "output": null,
+      "cssSelector": "div[data-role=\"title\"][aria-controls=\"block-summary\"]",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[2]/div/div/div",
+      "elementTag": "div",
+      "elementHash": "b1d75aa588",
+      "type": "click"
+    },
+    {
+      "description": "Select the Country by visible text in the country_id dropdown.",
+      "output": null,
+      "cssSelector": "select[name=\"country_id\"]",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[2]/div/div/div[2]/form/fieldset/div/div/select",
+      "elementTag": "select",
+      "elementHash": "732afb3437",
+      "type": "select_change",
+      "selectedText": "{country_id}"
+    },
+    {
+      "description": "Select the State/Province by visible text in the region_id dropdown.",
+      "output": null,
+      "cssSelector": "select[name=\"region_id\"]",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[2]/div/div/div[2]/form/fieldset/div[2]/div/select",
+      "elementTag": "select",
+      "elementHash": "a8278d94dd",
+      "type": "select_change",
+      "selectedText": "{region_id}"
+    },
+    {
+      "description": "Enter the Zip/Postal Code into the postcode input.",
+      "output": null,
+      "cssSelector": "input[name=\"postcode\"]",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[2]/div/div/div[2]/form/fieldset/div[4]/div/input",
+      "elementTag": "input",
+      "elementHash": "ab06d582a2",
+      "type": "input",
+      "value": "{postcode}"
+    },
+    {
+      "description": "Choose the Flat Rate shipping method (radio input).",
+      "output": null,
+      "cssSelector": "#s_method_flatrate_flatrate",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[2]/div/div/div[2]/form[2]/fieldset/dl/dd/div/input",
+      "elementTag": "input",
+      "elementHash": "f9b09ac659",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL with protocol (e.g., http://localhost:7770 for VWA or http://3.12.136.212:7770 for WebArena)"
+    },
+    {
+      "name": "country_id",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "region_id",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "postcode",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    }
+  ]
+}

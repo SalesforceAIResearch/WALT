@@ -1,0 +1,827 @@
+{
+    "workflows": [
+        {
+            "name": "search_orders",
+            "start_url": "http://3.12.136.212:7780/admin/sales/order/",
+            "description": "Filter and locate orders by user-provided criteria (keyword, date range, status, customer, totals) and export results if needed",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "global search box",
+                    "options": [
+                        "placeholder: Search"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "open Filters panel / clear all active filters"
+                },
+                {
+                    "type": "filters",
+                    "purpose": "apply specific filters",
+                    "options": [
+                        "Invoice/Order Date (date range)",
+                        "Grand Total (Base/Purchased) (number range)",
+                        "Purchased From (store view): All Store Views, Default Store View",
+                        "Invoice, Order #, Bill-to Name, Shipping/Billing Address, Customer Name, Email (text)",
+                        "Status (multiselect): Canceled, Closed, Complete, Suspected Fraud, On Hold, Payment Review, PayPal Canceled Reversal, PayPal Reversed, Pending, Pending Payment, Pending PayPal, Processing",
+                        "Customer Group (multiselect): NOT LOGGED IN, General, Wholesale, Retailer",
+                        "Payment Method (multiselect): ACH Direct Debit, Apple Pay, Bank Transfer Payment, Cash On Delivery, Check / Money order, Credit Card, ... , Venmo"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Mass Actions",
+                    "options": [
+                        "Cancel",
+                        "Hold",
+                        "Unhold",
+                        "Print Invoices",
+                        "Print Packing Slips",
+                        "Print Credit Memos",
+                        "Print All",
+                        "Print Shipping Labels"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Columns manager (22 available)"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Export results",
+                    "options": [
+                        "CSV",
+                        "Excel XML"
+                    ]
+                },
+                {
+                    "type": "link",
+                    "purpose": "row action: View order"
+                }
+            ]
+        },
+        {
+            "name": "update_order_status",
+            "start_url": "http://3.12.136.212:7780/admin/sales/order/",
+            "description": "Open an order by provided order_id and set its status to a user-provided value via the Comments History status select; optionally add comment and notify customer",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open order row 'View'"
+                },
+                {
+                    "type": "select",
+                    "purpose": "set order status (on Comments History)",
+                    "options": [
+                        "Canceled",
+                        "Closed",
+                        "Complete",
+                        "Suspected Fraud",
+                        "On Hold",
+                        "Payment Review",
+                        "PayPal Canceled Reversal",
+                        "PayPal Reversed",
+                        "Pending",
+                        "Pending Payment",
+                        "Pending PayPal",
+                        "Processing"
+                    ]
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "add internal/public comment"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "notify customer by email"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "visible on storefront"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Submit Comment / save status change"
+                }
+            ]
+        },
+        {
+            "name": "cancel_orders_bulk",
+            "start_url": "http://3.12.136.212:7780/admin/sales/order/",
+            "description": "Select multiple orders matching user criteria and cancel them via Mass Actions",
+            "elements": [
+                {
+                    "type": "filters",
+                    "purpose": "narrow to target orders (e.g., by status=Pending/Processing)"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "select rows"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Mass Actions",
+                    "options": [
+                        "Cancel"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Apply action"
+                }
+            ]
+        },
+        {
+            "name": "export_orders",
+            "start_url": "http://3.12.136.212:7780/admin/sales/order/",
+            "description": "Export filtered orders to user-selected format",
+            "elements": [
+                {
+                    "type": "filters",
+                    "purpose": "set export scope"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Export format",
+                    "options": [
+                        "CSV",
+                        "Excel XML"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Export"
+                }
+            ]
+        },
+        {
+            "name": "search_invoices",
+            "start_url": "http://3.12.136.212:7780/admin/sales/invoice/",
+            "description": "Filter and locate invoices by period, status, totals, customer, store view; export results",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "global search"
+                },
+                {
+                    "type": "filters",
+                    "purpose": "apply filters",
+                    "options": [
+                        "Invoice/Order Date (date range)",
+                        "Grand Total (Base/Purchased), Subtotal, Shipping and Handling (number range)",
+                        "Purchased From (store view): All Store Views, Default Store View",
+                        "Invoice, Order #, Bill-to Name (text)",
+                        "Status (select): Pending, Paid, Canceled",
+                        "Customer Group (select): NOT LOGGED IN, General, Wholesale, Retailer",
+                        "Payment Method (select): ACH Direct Debit, Apple Pay, ... , Venmo"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Actions (mass)",
+                    "options": [
+                        "PDF Invoices"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Export",
+                    "options": [
+                        "CSV",
+                        "Excel XML"
+                    ]
+                },
+                {
+                    "type": "link",
+                    "purpose": "row action: View invoice"
+                }
+            ]
+        },
+        {
+            "name": "send_invoice_email",
+            "start_url": "http://3.12.136.212:7780/admin/sales/invoice/",
+            "description": "Open a specific invoice and send the invoice email with optional comment",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open invoice 'View'"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Send Email"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "comment text (optional)"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "Notify Customer by Email"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "Visible on Storefront"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Submit Comment"
+                }
+            ]
+        },
+        {
+            "name": "print_invoice",
+            "start_url": "http://3.12.136.212:7780/admin/sales/invoice/view/invoice_id/1/",
+            "description": "Print a specific invoice as PDF",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Print"
+                }
+            ]
+        },
+        {
+            "name": "search_shipments",
+            "start_url": "http://3.12.136.212:7780/admin/sales/shipment/",
+            "description": "Filter shipments by date, order, customer, status and export or mass-generate PDFs",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "global search"
+                },
+                {
+                    "type": "filters",
+                    "purpose": "apply filters",
+                    "options": [
+                        "Ship Date / Order Date (date range)",
+                        "Order # (text or range)",
+                        "Total Quantity (number range)",
+                        "Purchased From (store view): All Store Views, Default Store View",
+                        "Order Status (multiselect): Canceled, Closed, Complete, ... , Processing",
+                        "Customer Group, Payment Method (multiselect)",
+                        "Addresses/Email/Shipping Info (text)"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Actions (mass)",
+                    "options": [
+                        "PDF Shipments"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Export",
+                    "options": [
+                        "CSV",
+                        "Excel XML"
+                    ]
+                },
+                {
+                    "type": "link",
+                    "purpose": "row action: View shipment"
+                }
+            ]
+        },
+        {
+            "name": "add_shipment_tracking",
+            "start_url": "http://3.12.136.212:7780/admin/sales/shipment/",
+            "description": "Open a shipment and add tracking info with user-provided carrier, title, and number; optionally send tracking email",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open shipment 'View'"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Carrier",
+                    "options": [
+                        "Custom Value",
+                        "DHL",
+                        "Federal Express",
+                        "United Parcel Service",
+                        "United States Postal Service"
+                    ]
+                },
+                {
+                    "type": "input",
+                    "purpose": "Title"
+                },
+                {
+                    "type": "input",
+                    "purpose": "Number"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Add (tracking)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Send Tracking Information"
+                }
+            ]
+        },
+        {
+            "name": "search_credit_memos",
+            "start_url": "http://3.12.136.212:7780/admin/sales/creditmemo/",
+            "description": "Filter credit memos by dates, totals, status, customer, store view; export results",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "global search"
+                },
+                {
+                    "type": "filters",
+                    "purpose": "apply filters",
+                    "options": [
+                        "Created / Order Date (date range)",
+                        "Refunded, Subtotal, Shipping & Handling, Adjustment Refund/Fee, Grand Total (number ranges)",
+                        "Purchased From (store view): All Store Views, Default Store View",
+                        "Credit Memo, Order #, Bill-to Name (text)",
+                        "Status (select): Pending, Refunded, Canceled",
+                        "Order Status (select): Canceled, Closed, Complete, ... , Processing",
+                        "Customer Group, Payment Method (selects)"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Actions (mass)",
+                    "options": [
+                        "PDF Credit Memos"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Export",
+                    "options": [
+                        "CSV",
+                        "Excel XML"
+                    ]
+                },
+                {
+                    "type": "link",
+                    "purpose": "row action: View credit memo"
+                }
+            ]
+        },
+        {
+            "name": "send_credit_memo_email",
+            "start_url": "http://3.12.136.212:7780/admin/sales/creditmemo/",
+            "description": "Open a credit memo and send email with optional comment",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open credit memo 'View'"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Send Email"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "comment"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "Notify Customer by Email"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "Visible on Storefront"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Submit Comment"
+                }
+            ]
+        },
+        {
+            "name": "search_customers",
+            "start_url": "http://3.12.136.212:7780/admin/customer/index/",
+            "description": "Search and filter customers by name, email, group, geography, and account meta; export the list",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "global search"
+                },
+                {
+                    "type": "filters",
+                    "purpose": "advanced filter panel",
+                    "options": [
+                        "ID (range), Customer Since (date range), Date of Birth (date range)",
+                        "Name, Email, Phone, ZIP, City, Company, VAT fields (text)",
+                        "Group (select): General, Retailer, Wholesale",
+                        "Country (select: full list), State/Province (text)",
+                        "Web Site (select): Main Website",
+                        "Gender (select): Male, Female, Not Specified"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Mass Actions",
+                    "options": [
+                        "Delete",
+                        "Subscribe to Newsletter",
+                        "Unsubscribe from Newsletter",
+                        "Assign a Customer Group \u2192 General/Wholesale/Retailer",
+                        "Edit"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Add New Customer"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Export",
+                    "options": [
+                        "CSV",
+                        "Excel XML"
+                    ]
+                },
+                {
+                    "type": "link",
+                    "purpose": "row action: Edit customer"
+                }
+            ]
+        },
+        {
+            "name": "update_customer_group",
+            "start_url": "http://3.12.136.212:7780/admin/customer/index/",
+            "description": "Open a customer record by ID/email and change their customer group to a provided value",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open customer Edit"
+                },
+                {
+                    "type": "tab",
+                    "purpose": "Account Information"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Group",
+                    "options": [
+                        "General",
+                        "Retailer",
+                        "Wholesale"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Save Customer"
+                }
+            ]
+        },
+        {
+            "name": "update_newsletter_subscription",
+            "start_url": "http://3.12.136.212:7780/admin/customer/index/",
+            "description": "Open a customer and toggle newsletter subscription for a provided store view",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open customer Edit"
+                },
+                {
+                    "type": "tab",
+                    "purpose": "Newsletter"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "Subscribed to Newsletter"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Subscribed on Store View",
+                    "options": [
+                        "Default Store View"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Save Customer"
+                }
+            ]
+        },
+        {
+            "name": "manage_customer_addresses",
+            "start_url": "http://3.12.136.212:7780/admin/customer/index/",
+            "description": "Open a customer and add/edit/delete addresses and set default billing/shipping",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open customer Edit"
+                },
+                {
+                    "type": "tab",
+                    "purpose": "Addresses"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Add New Address"
+                },
+                {
+                    "type": "grid",
+                    "purpose": "addresses grid with row actions",
+                    "options": [
+                        "Edit",
+                        "Set as default billing",
+                        "Set as default shipping",
+                        "Delete"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "view_customer_orders",
+            "start_url": "http://3.12.136.212:7780/admin/customer/index/",
+            "description": "Open a customer and review their orders via the embedded grid with filters",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open customer Edit"
+                },
+                {
+                    "type": "tab",
+                    "purpose": "Orders"
+                },
+                {
+                    "type": "filters",
+                    "purpose": "inline per-column filters (Order #, Purchased date range, names, totals, Purchase Point)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "row action: Reorder"
+                }
+            ]
+        },
+        {
+            "name": "create_customer_group",
+            "start_url": "http://3.12.136.212:7780/admin/customer/group/",
+            "description": "Create a new customer group with provided name/tax class and optionally exclude websites",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Add New Customer Group"
+                },
+                {
+                    "type": "input",
+                    "purpose": "Group Name (max < 32 chars)"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Tax Class",
+                    "options": [
+                        "Retail Customer"
+                    ]
+                },
+                {
+                    "type": "multiselect",
+                    "purpose": "Excluded Website(s)",
+                    "options": [
+                        "Main Website"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Save Customer Group"
+                }
+            ]
+        },
+        {
+            "name": "search_products",
+            "start_url": "http://3.12.136.212:7780/admin/catalog/product/index/",
+            "description": "Search and filter products by keyword and attributes; manage columns and pagination",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "global search (placeholder: Search)"
+                },
+                {
+                    "type": "filters",
+                    "purpose": "Filters panel (e.g., Name, SKU, Type, Status, Visibility, Price, Qty)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Add Product (type selector)",
+                    "options": [
+                        "Simple Product",
+                        "Configurable Product",
+                        "Grouped Product",
+                        "Virtual Product",
+                        "Bundle Product",
+                        "Downloadable Product"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Mass Actions",
+                    "options": [
+                        "Delete",
+                        "Change status \u2192 Enable/Disable",
+                        "Update attributes",
+                        "Assign/Unassign/Transfer Inventory Source"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Columns manager (37 available)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "row action: Edit product"
+                }
+            ]
+        },
+        {
+            "name": "bulk_change_product_status",
+            "start_url": "http://3.12.136.212:7780/admin/catalog/product/index/",
+            "description": "Filter and select products, then enable/disable them in bulk",
+            "elements": [
+                {
+                    "type": "filters",
+                    "purpose": "narrow selection (e.g., by attribute set, visibility, status)"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "select rows"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Actions \u2192 Change status",
+                    "options": [
+                        "Enable",
+                        "Disable"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Apply"
+                }
+            ]
+        },
+        {
+            "name": "bulk_update_product_attributes",
+            "start_url": "http://3.12.136.212:7780/admin/catalog/product/index/",
+            "description": "Filter and select products, then open Update attributes flow to set provided attribute values in bulk",
+            "elements": [
+                {
+                    "type": "checkbox",
+                    "purpose": "select rows"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Actions \u2192 Update attributes"
+                }
+            ]
+        },
+        {
+            "name": "update_product_price",
+            "start_url": "http://3.12.136.212:7780/admin/catalog/product/index/",
+            "description": "Open a specific product by SKU/ID and update its base price; optionally adjust tax class and visibility",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "row action: Edit"
+                },
+                {
+                    "type": "input",
+                    "purpose": "Price (Advanced Pricing link available)"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Tax Class",
+                    "options": [
+                        "None",
+                        "Taxable Goods"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "Visibility",
+                    "options": [
+                        "Not Visible Individually",
+                        "Catalog",
+                        "Search",
+                        "Catalog, Search"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Save / Save & options"
+                }
+            ]
+        },
+        {
+            "name": "update_inventory_quantity",
+            "start_url": "http://3.12.136.212:7780/admin/catalog/product/index/",
+            "description": "Open a product and update Quantity and Stock Status; use Advanced Inventory if needed",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "row action: Edit"
+                },
+                {
+                    "type": "input",
+                    "purpose": "Quantity"
+                },
+                {
+                    "type": "select",
+                    "purpose": "Stock Status",
+                    "options": [
+                        "In Stock",
+                        "Out of Stock"
+                    ]
+                },
+                {
+                    "type": "link",
+                    "purpose": "Advanced Inventory (manage sources/salable qty)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Save"
+                }
+            ]
+        },
+        {
+            "name": "create_category",
+            "start_url": "http://3.12.136.212:7780/admin/catalog/category/",
+            "description": "Create a new root category or subcategory with provided name and settings (enable, include in menu)",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Add Root Category / Add Subcategory"
+                },
+                {
+                    "type": "input",
+                    "purpose": "Category Name"
+                },
+                {
+                    "type": "toggle",
+                    "purpose": "Enable Category"
+                },
+                {
+                    "type": "toggle",
+                    "purpose": "Include in Menu"
+                },
+                {
+                    "type": "accordion",
+                    "purpose": "Content, Display Settings, SEO, Products in Category, Design, Schedule Design Update"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Save"
+                }
+            ]
+        },
+        {
+            "name": "send_shipment_tracking_email",
+            "start_url": "http://3.12.136.212:7780/admin/sales/shipment/view/shipment_id/1/",
+            "description": "Send tracking information email for a specific shipment (after adding or updating tracking)",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Send Tracking Information"
+                }
+            ]
+        },
+        {
+            "name": "export_invoices",
+            "start_url": "http://3.12.136.212:7780/admin/sales/invoice/",
+            "description": "Export current invoice grid results to CSV or Excel XML",
+            "elements": [
+                {
+                    "type": "select",
+                    "purpose": "Export format",
+                    "options": [
+                        "CSV",
+                        "Excel XML"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Export"
+                }
+            ]
+        },
+        {
+            "name": "export_credit_memos",
+            "start_url": "http://3.12.136.212:7780/admin/sales/creditmemo/",
+            "description": "Export credit memo grid results to CSV or Excel XML",
+            "elements": [
+                {
+                    "type": "select",
+                    "purpose": "Export format",
+                    "options": [
+                        "CSV",
+                        "Excel XML"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Export"
+                }
+            ]
+        }
+    ]
+}

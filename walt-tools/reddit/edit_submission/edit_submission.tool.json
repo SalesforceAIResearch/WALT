@@ -1,0 +1,66 @@
+{
+  "name": "Edit-Submission-Title-and-Body",
+  "description": "Open a Postmill submission edit form by direct URL, update Title and Body, save. PRECONDITION: Submission must exist and be owned by the user. Successful outcome: The submission is updated and the page is reloaded to show the updated submission.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Navigate directly to the submission edit form at /f/{forum}/{id}/-/edit",
+      "output": null,
+      "type": "navigation",
+      "url": "{edit_url}",
+      "url_operation": null
+    },
+    {
+      "description": "Enter the new Title text (required)",
+      "output": null,
+      "cssSelector": "#submission_title",
+      "xpath": "html/body/div[2]/main/form/div[2]/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "a24777e5b6",
+      "type": "input",
+      "value": "{new_title}"
+    },
+    {
+      "description": "Enter the new Body text (Markdown supported)",
+      "output": null,
+      "cssSelector": "#submission_body",
+      "xpath": "html/body/div[2]/main/form/div[3]/div/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "e9bf2d7eeb",
+      "type": "input",
+      "value": "{new_body}"
+    },
+    {
+      "description": "Submit the form by clicking 'Edit submission' (save)",
+      "output": null,
+      "cssSelector": "form > div > button.button",
+      "xpath": "html/body/div[2]/main/form/div[5]/button",
+      "elementTag": "button",
+      "elementHash": "d036665039",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "edit_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "new_title",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "new_body",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

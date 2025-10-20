@@ -1,0 +1,55 @@
+{  
+  "name": "pdp_set_quantity_add_to_cart",
+  "description": "Open a specific product detail page, set the desired quantity, and click Add to Cart using deterministic element references. PRECONDITION: Can be called from any page but product URL must be valid. Successful outcome: Desired quantity of product is added to cart.",
+  "version": "1.0",
+  "steps": [
+    {
+      "description": "Open the product detail page for product URL.",
+      "output": null,
+      "type": "navigation",
+      "url": "{product_url}",
+      "url_operation": null
+    },
+    {
+      "description": "Enter the desired quantity into the Qty input field.",
+      "output": null,
+      "cssSelector": "#qty",
+      "xpath": "html/body/div[2]/main/div[3]/div/div/div[2]/form/div/div/div/div/input",
+      "elementTag": "input",
+      "elementHash": "71cd27ddc5",
+      "type": "input",
+      "value": "{qty}"
+    },
+    {
+      "description": "Click the Add to Cart button to add the product to the cart.",
+      "output": null,
+      "cssSelector": "#product-addtocart-button",
+      "xpath": "html/body/div[2]/main/div[3]/div/div/div[2]/form/div/div/div[2]/button",
+      "elementTag": "button",
+      "elementHash": "456c4043f6",
+      "type": "click"
+    },
+    {
+      "description": "Wait for the cart update confirmation to ensure the product is successfully added.",
+      "output": null,
+      "type": "wait",
+      "seconds": 3
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "product_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "qty",
+      "type": "number",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

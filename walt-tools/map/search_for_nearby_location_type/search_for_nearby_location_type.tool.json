@@ -1,0 +1,40 @@
+{
+  "name": "workflow_search_for_nearby_location_type",
+  "description": "Search for a specific **type** of place on OpenStreetMap near a specific location (e.g. restaurants near Carnegie Mellon University). In case no results are found, try making the search more general or use expansions instead of abbreviations.",
+  "version": "2.0.0",
+  "steps": [
+    {
+      "description": "Navigate to OpenStreetMap search with query and map centered at the first result (if found).",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/search?query={location_type}%20near%20{location}",
+      "url_operation": null
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL of the OpenStreetMap instance (e.g., http://3.12.136.212:3000)"
+    },
+    {
+      "name": "location_type",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null,
+      "description": "Type of place to search for (e.g. restaurant or airport)."
+    },
+    {
+      "name": "location",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null,
+      "description": "Location to search near - ideally should be a specific place name (e.g. Carnegie Mellon University)"
+    }
+  ]
+}

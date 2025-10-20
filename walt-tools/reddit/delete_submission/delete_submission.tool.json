@@ -1,0 +1,36 @@
+{
+  "name": "workflow_delete_submission",
+  "description": "Open a submission detail page and delete the submission by clicking the submission-level Delete control. PRECONDITION: Submission must exist. Successful outcome: The submission is deleted.",
+  "version": "2.0",
+  "steps": [
+    {
+      "description": "Open the submission detail page to be deleted.",
+      "output": null,
+      "type": "navigation",
+      "url": "{submission_url}",
+      "url_operation": null
+    },
+    {
+      "description": "Click the submission Delete button in the main article controls.",
+      "output": null,
+      "type": "click",
+      "cssSelector": "article.submission-article a[href*='delete']",
+      "xpath": null
+    },
+    {
+      "description": "Allow time for redirect or page update after deletion.",
+      "output": null,
+      "type": "wait",
+      "seconds": 2.0
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "submission_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

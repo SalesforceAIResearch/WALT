@@ -1,0 +1,69 @@
+{
+  "name": "workflow_order_lookup.v2",
+  "description": "Order lookup that works for both logged-in and guest users. For logged-in users, navigates to order history and clicks on the specified order. For guests, uses the Orders and Returns form with Order ID, Billing Last Name, and Email/ZIP. PRECONDITION: Either logged in with access to order history, or guest access to Orders and Returns page. Successful outcome: The specified order is found and opened.",
+  "version": "2.0.0",
+  "steps": [
+    {
+      "description": "Navigate to order history for logged-in users, or guest lookup form if not logged in.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/sales/order/history/",
+      "url_operation": null
+    },
+    {
+      "description": "Detect if user is logged in (sees order history table) or needs guest lookup, and handle accordingly.",
+      "output": null,
+      "type": "agent",
+      "task": "Check if the current page shows an order history table with order {oar_order_id}. If the page shows an order history table with orders, click on the row containing order {oar_order_id} to view it. If the page shows a guest login form or redirects to login, navigate to {base_url}/sales/guest/form/ and fill out the guest order lookup form with: Order ID: {oar_order_id}, Billing Last Name: {oar_billing_lastname}, lookup type: {oar_type_text}, and if Email selected use {oar_email}, if ZIP Code selected use {oar_zip}.",
+      "max_steps": 8
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL with protocol (e.g., http://localhost:7770 for VWA or http://3.12.136.212:7770 for WebArena)"
+    },
+    {
+      "name": "oar_order_id",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "oar_billing_lastname",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "oar_type_text",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "Email",
+        "ZIP Code"
+      ]
+    },
+    {
+      "name": "oar_email",
+      "type": "string",
+      "format": "user@domain.com",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "oar_zip",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    }
+  ]
+}

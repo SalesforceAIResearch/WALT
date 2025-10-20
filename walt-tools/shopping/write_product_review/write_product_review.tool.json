@@ -1,0 +1,101 @@
+{
+  "name": "workflow_write_product_review.v2",
+  "description": "Open the product's Reviews tab and submit a review with user-provided Nickname, Summary (title), and Review text, using deterministic element hashes and avoiding fragment-only URL navigation. PRECONDITION: The product must have a Reviews tab. Successful outcome: The review is submitted.",
+  "version": "2.0.0",
+  "steps": [
+    {
+      "description": "Open the target product page.",
+      "output": null,
+      "type": "navigation",
+      "url": "{product_url}",
+      "url_operation": null
+    },
+    {
+      "description": "Open the Reviews tab to reveal the review form.",
+      "output": null,
+      "cssSelector": "#tab-label-reviews-title",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[3]/div/div[3]/a",
+      "elementTag": "a",
+      "elementHash": "bb55ab81f9",
+      "type": "click"
+    },
+    {
+      "description": "Select a valid rating (2 stars) required by the form.",
+      "output": null,
+      "cssSelector": "#Rating_2_label",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[3]/div/div[4]/div[2]/div[2]/form/fieldset/fieldset/div/div/div/div/label[2]",
+      "elementTag": "label",
+      "elementHash": "c91fcbd63b",
+      "type": "click"
+    },
+    {
+      "description": "Enter reviewer Nickname (required).",
+      "output": null,
+      "cssSelector": "#nickname_field",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[3]/div/div[4]/div[2]/div[2]/form/fieldset/div/div/input",
+      "elementTag": "input",
+      "elementHash": "955ba82648",
+      "type": "input",
+      "value": "{nickname}"
+    },
+    {
+      "description": "Enter review Summary/Title (required).",
+      "output": null,
+      "cssSelector": "#summary_field",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[3]/div/div[4]/div[2]/div[2]/form/fieldset/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "5f838df071",
+      "type": "input",
+      "value": "{title}"
+    },
+    {
+      "description": "Enter the detailed Review text (required).",
+      "output": null,
+      "cssSelector": "#review_field",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[3]/div/div[4]/div[2]/div[2]/form/fieldset/div[3]/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "34ec6845da",
+      "type": "input",
+      "value": "{detail}"
+    },
+    {
+      "description": "Submit the review form.",
+      "output": null,
+      "cssSelector": "button.action.submit",
+      "xpath": "html/body/div[2]/main/div[3]/div/div[3]/div/div[4]/div[2]/div[2]/form/div/div/button",
+      "elementTag": "button",
+      "elementHash": "f8f41f5c51",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "product_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "nickname",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "detail",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

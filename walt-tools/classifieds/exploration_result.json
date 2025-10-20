@@ -1,0 +1,283 @@
+{
+    "workflows": [
+        {
+            "name": "search_listings",
+            "start_url": "http://localhost:9980",
+            "description": "Search listings using user-provided keywords (optional: choose category) and submit the query",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter user-provided search keywords"
+                },
+                {
+                    "type": "select",
+                    "purpose": "optionally choose user-specified category"
+                },
+                {
+                    "type": "button",
+                    "purpose": "submit search"
+                }
+            ]
+        },
+        {
+            "name": "filter_results_by_city",
+            "start_url": "http://localhost:9980/index.php?page=search&sCategory=9",
+            "description": "Filter current results by user-provided city name and apply",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter city filter (sCity)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "apply filters"
+                }
+            ]
+        },
+        {
+            "name": "filter_results_by_price_range",
+            "start_url": "http://localhost:9980/index.php?page=search&sCategory=9",
+            "description": "Filter results by user-provided minimum and/or maximum price and apply",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter minimum price (sPriceMin)"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter maximum price (sPriceMax)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "apply filters"
+                }
+            ]
+        },
+        {
+            "name": "filter_results_pictures_only",
+            "start_url": "http://localhost:9980/index.php?page=search&sCategory=9",
+            "description": "Show only listings with pictures and apply",
+            "elements": [
+                {
+                    "type": "checkbox",
+                    "purpose": "toggle 'listings with pictures' (bPic)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "apply filters"
+                }
+            ]
+        },
+        {
+            "name": "sort_results",
+            "start_url": "http://localhost:9980/index.php?page=search&sCategory=9",
+            "description": "Sort current search results by user-selected order",
+            "elements": [
+                {
+                    "type": "select",
+                    "purpose": "choose sort order",
+                    "options": [
+                        "Newly listed",
+                        "Lower price first",
+                        "Higher price first"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "subscribe_to_search",
+            "start_url": "http://localhost:9980/index.php?page=search&sPattern=test",
+            "description": "Subscribe to the current search using a user-provided email address",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter email to subscribe (alert_email)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "submit subscription (Subscribe now!)"
+                }
+            ]
+        },
+        {
+            "name": "refine_by_category",
+            "start_url": "http://localhost:9980/index.php?page=search&sPattern=test",
+            "description": "Refine the current results by choosing a category link",
+            "elements": [
+                {
+                    "type": "menu",
+                    "purpose": "choose category via 'Refine category' links",
+                    "options": [
+                        "All categories",
+                        "Books"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "paginate_results",
+            "start_url": "http://localhost:9980/index.php?page=search&sCategory=9",
+            "description": "Navigate result pages using page number or next/previous controls",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open a specific page number (e.g., 2, 3)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "go to next page (\u00bb)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "go to previous page if available"
+                }
+            ]
+        },
+        {
+            "name": "open_listing_detail_by_title",
+            "start_url": "http://localhost:9980/index.php?page=search&sCategory=9",
+            "description": "Open a listing detail page by clicking the listing title that matches a user-provided title",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "click listing title matching user input"
+                }
+            ]
+        },
+        {
+            "name": "contact_seller",
+            "start_url": "http://localhost:9980/index.php?page=item&id=48810",
+            "description": "Open the contact form on a listing and send a message with user-provided details",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open contact seller form (Contact seller)"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter your name"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter your email"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "enter your message"
+                },
+                {
+                    "type": "button",
+                    "purpose": "send message"
+                }
+            ]
+        },
+        {
+            "name": "post_comment_on_listing",
+            "start_url": "http://localhost:9980/index.php?page=item&id=48810",
+            "description": "Post a public comment on a listing with user-provided fields",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter your name"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter your email"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter comment title (if present)"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "enter comment text"
+                },
+                {
+                    "type": "button",
+                    "purpose": "submit comment"
+                }
+            ]
+        },
+        {
+            "name": "report_listing",
+            "start_url": "http://localhost:9980/index.php?page=item&id=48810",
+            "description": "Report a listing by selecting a reason from the 'Mark as...' options",
+            "elements": [
+                {
+                    "type": "select",
+                    "purpose": "choose report reason",
+                    "options": [
+                        "spam",
+                        "misclassified",
+                        "duplicated",
+                        "expired",
+                        "offensive"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "share_listing",
+            "start_url": "http://localhost:9980/index.php?page=item&id=48810",
+            "description": "Share a listing using the built-in share control",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open share options (Share)"
+                }
+            ]
+        },
+        {
+            "name": "publish_listing",
+            "start_url": "http://localhost:9980/index.php?page=item&action=item_add",
+            "description": "Create a new listing by filling required fields with user-provided values and publish",
+            "elements": [
+                {
+                    "type": "select",
+                    "purpose": "choose category",
+                    "options": [
+                        "Books"
+                    ]
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter listing title"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "enter listing description"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter price (optional)"
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose region",
+                    "options": [
+                        "California"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose city (depends on region)",
+                    "options": [
+                        "San Francisco"
+                    ]
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter seller name"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter seller email"
+                },
+                {
+                    "type": "button",
+                    "purpose": "publish listing"
+                }
+            ]
+        }
+    ]
+}

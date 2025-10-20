@@ -1,0 +1,90 @@
+{
+  "name": "workflow_search_projects.v1",
+  "description": "Open a GitLab dashboard section (Yours or Starred), apply a name filter and sorting via URL parameters, optionally set archive/ownership/page.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the selected dashboard section route (e.g., /dashboard/projects or /dashboard/projects/starred).",
+      "output": null,
+      "type": "navigation",
+      "url": "http://3.12.136.212:8023{route_path}",
+      "url_operation": null
+    },
+    {
+      "description": "Apply name filter, sorting, and optional refinements by replacing URL query parameters in one operation.",
+      "output": null,
+      "type": "navigation",
+      "url": null,
+      "url_operation": {
+        "base": "{current_url}",
+        "replace": {
+          "name": "{name}",
+          "sort": "{sort}",
+          "archived": "{archived}",
+          "personal": "{personal}",
+          "page": "{page}"
+        }
+      }
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "route_path",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "/dashboard/projects",
+        "/dashboard/projects/starred"
+      ]
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "sort",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "latest_activity_desc",
+        "created_desc",
+        "name_asc",
+        "name_desc",
+        "stars_desc",
+        "latest_activity_asc",
+        "created_asc"
+      ]
+    },
+    {
+      "name": "archived",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "true",
+        "only"
+      ]
+    },
+    {
+      "name": "personal",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": [
+        "true"
+      ]
+    },
+    {
+      "name": "page",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    }
+  ]
+}

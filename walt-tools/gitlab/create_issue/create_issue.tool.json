@@ -1,0 +1,59 @@
+{
+  "name": "gitlab_create_issue",
+  "description": "Creates a new GitLab issue by filling Title and Description on the New Issue form and submitting.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the New Issue form directly, skipping the list page.",
+      "output": null,
+      "type": "navigation",
+      "url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues/new",
+      "url_operation": null
+    },
+    {
+      "description": "Enter the issue title into input[name='issue[title]'].",
+      "output": null,
+      "cssSelector": "#issue_title",
+      "xpath": "html/body/div[3]/div/div[3]/main/form/div/div/input",
+      "elementTag": "input",
+      "elementHash": "8705027c07",
+      "type": "input",
+      "value": "{issue_title}"
+    },
+    {
+      "description": "Enter the issue description into textarea[name='issue[description]'].",
+      "output": null,
+      "cssSelector": "#issue_description",
+      "xpath": "html/body/div[3]/div/div[3]/main/form/div[4]/div[2]/div[2]/div/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "42192c96cc",
+      "type": "input",
+      "value": "{issue_description}"
+    },
+    {
+      "description": "Submit the form by clicking the Create issue button.",
+      "output": null,
+      "cssSelector": "button.gl-button.btn",
+      "xpath": "html/body/div[3]/div/div[3]/main/form/div[7]/button",
+      "elementTag": "button",
+      "elementHash": "d1d73accd4",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "issue_title",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "issue_description",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

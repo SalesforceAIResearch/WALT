@@ -1,0 +1,71 @@
+{
+  "name": "postmill_post_top_level_comment",
+  "description": "Posts a top-level comment on a Postmill submission by navigating via short URL /{submission_id}, opening Formatting help, entering markdown body, submitting. PRECONDITION: Short URL must be valid. Successful outcome: The comment is posted and the page is reloaded to show the new comment.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Navigate directly to the submission using its short URL pattern.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/{submission_id}",
+      "url_operation": null
+    },
+    {
+      "description": "Open the Markdown Formatting help to demonstrate the control.",
+      "output": null,
+      "cssSelector": "label.hideable__toggle.no-underline",
+      "xpath": "html/body/div[2]/main/form/div/div[2]/label",
+      "elementTag": "label",
+      "elementHash": "0501ddf308",
+      "type": "click"
+    },
+    {
+      "description": "Enter the markdown body into the top-level comment textarea.",
+      "output": null,
+      "cssSelector": "#reply_to_submission_30995_comment",
+      "xpath": "html/body/div[2]/main/form/div/div/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "79a98e053c",
+      "type": "input",
+      "value": "{body}"
+    },
+    {
+      "description": "Submit the comment using the Post button.",
+      "output": null,
+      "cssSelector": "form > div > button.button",
+      "xpath": "html/body/div[2]/main/form/div[3]/button",
+      "elementTag": "button",
+      "elementHash": "d036665039",
+      "type": "click"
+    },
+    {
+      "description": "Allow time for the page to reload and scroll to the new comment.",
+      "output": null,
+      "type": "wait",
+      "seconds": 1.0
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "submission_id",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "body",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

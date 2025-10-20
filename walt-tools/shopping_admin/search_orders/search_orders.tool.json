@@ -1,0 +1,168 @@
+{
+  "name": "workflow_search_orders.v3",
+  "description": "Filters Orders by keyword, purchase date range, status, and grand total (purchased)..",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Go directly to the Orders grid.",
+      "output": null,
+      "type": "navigation",
+      "url": "{orders_url}",
+      "url_operation": null
+    },
+    {
+      "description": "Open the Filters panel.",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-expand\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[3]/div/button",
+      "elementTag": "button",
+      "elementHash": "e1690a31fa",
+      "type": "click"
+    },
+    {
+      "description": "Clear all active filters to start from a clean state.",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-reset\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[4]/div[3]/button",
+      "elementTag": "button",
+      "elementHash": "fc89c7c126",
+      "type": "click"
+    },
+    {
+      "description": "Enter global search keyword.",
+      "output": null,
+      "cssSelector": "input[placeholder=\"Search by keyword\"][aria-label=\"Search by keyword\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[2]/input",
+      "elementTag": "input",
+      "elementHash": "4e641cc4c6",
+      "type": "input",
+      "value": "{filter_keyword}"
+    },
+    {
+      "description": "Submit the global search.",
+      "output": null,
+      "cssSelector": "button[aria-label=\"Search\"][aria-label=\"Search\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[2]/button",
+      "elementTag": "button",
+      "elementHash": "341036eef5",
+      "type": "click"
+    },
+    {
+      "description": "Enter Purchase Date From (MM/DD/YYYY).",
+      "output": null,
+      "cssSelector": "input[name=\"created_at[from]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/fieldset/div/div/input",
+      "elementTag": "input",
+      "elementHash": "517db2137c",
+      "type": "input",
+      "value": "{purchase_date_from}"
+    },
+    {
+      "description": "Enter Purchase Date To (MM/DD/YYYY).",
+      "output": null,
+      "cssSelector": "input[name=\"created_at[to]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/fieldset/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "ffd16222db",
+      "type": "input",
+      "value": "{purchase_date_to}"
+    },
+    {
+      "description": "Enter Grand Total (Purchased) From amount.",
+      "output": null,
+      "cssSelector": "input[name=\"grand_total[from]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/fieldset[3]/div/div/input",
+      "elementTag": "input",
+      "elementHash": "0efb68cb91",
+      "type": "input",
+      "value": "{grand_total_purchased_from}"
+    },
+    {
+      "description": "Enter Grand Total (Purchased) To amount.",
+      "output": null,
+      "cssSelector": "input[name=\"grand_total[to]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/fieldset[3]/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "6a4db07e98",
+      "type": "input",
+      "value": "{grand_total_purchased_to}"
+    },
+    {
+      "description": "Select order Status.",
+      "output": null,
+      "cssSelector": "select[name=\"status\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/fieldset/div[5]/div/select",
+      "elementTag": "select",
+      "elementHash": "10095bcb2c",
+      "type": "select_change",
+      "selectedText": "{status}"
+    },
+    {
+      "description": "Apply the filters.",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-apply\"]",
+      "xpath": "html/body/div[2]/main/div[2]/div/div/div/div[2]/div/div[5]/div/div/button[2]",
+      "elementTag": "button",
+      "elementHash": "a0f0d35e24",
+      "type": "click"
+    }    
+  ],
+  "input_schema": [
+    {
+      "name": "orders_url",
+      "type": "string",
+      "format": null,
+      "description": "Full URL of the Orders grid (e.g., http://host:port/admin/sales/order/).",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "filter_keyword",
+      "type": "string",
+      "format": null,
+      "description": "Global search keyword entered in the Orders toolbar search box.",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "purchase_date_from",
+      "type": "string",
+      "format": "MM/DD/YYYY",
+      "description": "Purchase Date range start (MM/DD/YYYY).",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "purchase_date_to",
+      "type": "string",
+      "format": "MM/DD/YYYY",
+      "description": "Purchase Date range end (MM/DD/YYYY).",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "grand_total_purchased_from",
+      "type": "string",
+      "format": null,
+      "description": "Minimum Grand Total (Purchased) amount filter.",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "grand_total_purchased_to",
+      "type": "string",
+      "format": null,
+      "description": "Maximum Grand Total (Purchased) amount filter.",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "format": null,
+      "description": "Order Status visible text to filter by (e.g., Pending, Processing, Complete, Canceled, On Hold, Payment Review, etc.).",
+      "required": true,
+      "enum": null
+    }
+  ]
+}

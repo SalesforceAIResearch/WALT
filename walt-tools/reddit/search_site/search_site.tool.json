@@ -1,0 +1,31 @@
+{
+  "name": "postmill_site_search",
+  "description": "Perform a Postmill site-wide search via GET parameter q. PRECONDITION: Can be called from any page. Successful outcome: Navigation to page with search results.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the search results page for the given query.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/search?q={q}",
+      "url_operation": null
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL with protocol (e.g., http://localhost:9999 for VWA or http://3.12.136.212:9999 for WebArena)"
+    },
+    {
+      "name": "q",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

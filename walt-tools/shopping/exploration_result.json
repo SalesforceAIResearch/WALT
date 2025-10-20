@@ -1,0 +1,408 @@
+{
+    "workflows": [
+        {
+            "name": "search_products",
+            "start_url": "http://localhost:7770/",
+            "description": "Search the catalog using user-provided keywords in the global header search; optionally adjust Sort By and page size on the results page.",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter user-provided search terms in header search (name=\"q\", placeholder=\"Search entire store here...\")"
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose Sort By on results",
+                    "options": [
+                        "Position",
+                        "Product Name",
+                        "Price"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "set results page size",
+                    "options": [
+                        "12",
+                        "24",
+                        "36"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "submit search (press Enter in the search field or click search icon)"
+                }
+            ]
+        },
+        {
+            "name": "advanced_search_products",
+            "start_url": "http://localhost:7770/catalogsearch/advanced/",
+            "description": "Run an advanced product search using any combination of fields (user-provided name, SKU, description, short description, price min/max).",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter Product Name"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter SKU"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Description keywords"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Short Description keywords"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Price From (minimum)"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Price To (maximum)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "submit advanced search"
+                }
+            ]
+        },
+        {
+            "name": "browse_category_with_filters",
+            "start_url": "http://localhost:7770/grocery-gourmet-food.html",
+            "description": "Browse a category and refine results using user-specified layered navigation filters; adjust sorting, page size, view mode, and pagination.",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "apply a layered navigation filter (e.g., Category, Price range)"
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose Sort By",
+                    "options": [
+                        "Position",
+                        "Product Name",
+                        "Price"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "set page size (Show)",
+                    "options": [
+                        "12",
+                        "24",
+                        "36"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "toggle view mode (Grid/List)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "use pagination controls (Prev/Next/page number)"
+                }
+            ]
+        },
+        {
+            "name": "view_product_details",
+            "start_url": "http://localhost:7770/grocery-gourmet-food.html",
+            "description": "Open a product detail page by clicking the product with a user-specified title from the category or results list.",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "click product title to open PDP"
+                }
+            ]
+        },
+        {
+            "name": "add_product_to_cart",
+            "start_url": "http://localhost:7770/6-x-abakus-food-natural-cheese-flavour-seaweed-crisps-0-63-oz.html",
+            "description": "On a product detail page, set a user-provided quantity and add the item to the cart.",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter desired quantity"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Add to Cart"
+                }
+            ]
+        },
+        {
+            "name": "add_to_compare_from_list",
+            "start_url": "http://localhost:7770/catalogsearch/advanced/result",
+            "description": "From a results or category list, add one or more user-specified items to the Compare list and open the comparison view.",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Add to Compare on the target item card"
+                },
+                {
+                    "type": "button",
+                    "purpose": "open Compare from the sidebar to view selected items"
+                }
+            ]
+        },
+        {
+            "name": "manage_compare_list",
+            "start_url": "http://localhost:7770/catalogsearch/advanced/result",
+            "description": "Open the Compare page and manage items: remove a specific item or clear all; optionally add to cart from the compare table.",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open Compare (sidebar button)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "remove a specific item from compare"
+                },
+                {
+                    "type": "button",
+                    "purpose": "clear all compared items"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Add to Cart from compare row (if available)"
+                }
+            ]
+        },
+        {
+            "name": "update_cart_item_quantity",
+            "start_url": "http://localhost:7770/checkout/cart/",
+            "description": "On the Shopping Cart page, locate a line item by user-provided title and update its quantity to a user-provided value.",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "edit quantity for the target line item"
+                },
+                {
+                    "type": "button",
+                    "purpose": "update cart/totals (e.g., Update Shopping Cart)"
+                }
+            ]
+        },
+        {
+            "name": "remove_cart_item",
+            "start_url": "http://localhost:7770/checkout/cart/",
+            "description": "Remove a user-specified item from the Shopping Cart.",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "remove item from cart (trash/bin or Remove link)"
+                }
+            ]
+        },
+        {
+            "name": "apply_coupon_to_cart",
+            "start_url": "http://localhost:7770/checkout/cart/",
+            "description": "Apply a user-provided coupon code from the cart using the discount panel.",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "expand Apply Discount Code panel"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter coupon code"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Apply Discount"
+                }
+            ]
+        },
+        {
+            "name": "estimate_shipping",
+            "start_url": "http://localhost:7770/checkout/cart/",
+            "description": "Estimate shipping and tax by setting country/region/postcode and selecting a quoted shipping method (e.g., Flat Rate).",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "expand Estimate Shipping and Tax panel"
+                },
+                {
+                    "type": "select",
+                    "purpose": "select Country (many options)"
+                },
+                {
+                    "type": "select",
+                    "purpose": "select State/Region (many options)"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Postcode/ZIP"
+                },
+                {
+                    "type": "button",
+                    "purpose": "calculate/update shipping estimates"
+                },
+                {
+                    "type": "radio",
+                    "purpose": "choose a returned shipping method (e.g., Flat Rate)"
+                }
+            ]
+        },
+        {
+            "name": "proceed_to_checkout_guest",
+            "start_url": "http://localhost:7770/checkout/cart/",
+            "description": "Start checkout as a guest: proceed to checkout, complete Shipping Address, select a shipping method, and continue to Review & Payments (stop before placing the order).",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Proceed to Checkout"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Email on Shipping step"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter First Name"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Last Name"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Street Address"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter City"
+                },
+                {
+                    "type": "select",
+                    "purpose": "select Country"
+                },
+                {
+                    "type": "select",
+                    "purpose": "select State/Region"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Postcode"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Telephone"
+                },
+                {
+                    "type": "radio",
+                    "purpose": "select shipping method (e.g., Flat Rate)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Next to Review & Payments"
+                },
+                {
+                    "type": "radio",
+                    "purpose": "select a payment method (do not place order)"
+                }
+            ]
+        },
+        {
+            "name": "subscribe_newsletter",
+            "start_url": "http://localhost:7770/",
+            "description": "Subscribe to the store newsletter with a user-provided email address from the footer form.",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter email (placeholder=\"Enter your email address\")"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Subscribe"
+                }
+            ]
+        },
+        {
+            "name": "contact_support",
+            "start_url": "http://localhost:7770/contact/",
+            "description": "Submit the Contact Us form with user-provided Name, Email, Telephone, and Message (Comment).",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter Name"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Email"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Telephone"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "enter Comment/Message"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Submit"
+                }
+            ]
+        },
+        {
+            "name": "order_lookup",
+            "start_url": "http://localhost:7770/sales/guest/form/",
+            "description": "Find an order using user-provided details (Order ID, Billing Last Name, and either Email or ZIP Code).",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter Order ID (name=\"oar_order_id\")"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Billing Last Name (name=\"oar_billing_lastname\")"
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose lookup mode (Find Order By)",
+                    "options": [
+                        "Email",
+                        "ZIP Code"
+                    ]
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Email (name=\"oar_email\") or ZIP Code (per selected mode)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Continue (submit lookup)"
+                }
+            ]
+        },
+        {
+            "name": "write_product_review",
+            "start_url": "http://localhost:7770/6-x-abakus-food-natural-cheese-flavour-seaweed-crisps-0-63-oz.html",
+            "description": "Open the Reviews tab on a product page and submit a review with user-provided Nickname, Summary, and Review (if available to guests).",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open Reviews tab"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Nickname"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter Summary"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "enter detailed Review"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Submit Review"
+                }
+            ]
+        }
+    ]
+}

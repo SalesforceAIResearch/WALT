@@ -1,0 +1,101 @@
+{
+  "name": "contact_form_submit",
+  "description": "Submit the Contact Us form by filling Name, Email, Telephone, and Comment, then clicking Submit. PRECONDITION: Can be called from any page. Successful outcome: Submits the contact form.",
+  "version": "1.0",
+  "steps": [
+    {
+      "description": "Open the Contact Us page.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/contact/",
+      "url_operation": null
+    },
+    {
+      "description": "Enter Name into the Name field.",
+      "output": null,
+      "cssSelector": "#name",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "df3020a86b",
+      "type": "input",
+      "value": "{name}"
+    },
+    {
+      "description": "Enter Email into the Email field (must be a valid email address).",
+      "output": null,
+      "cssSelector": "#email",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div[3]/div/input",
+      "elementTag": "input",
+      "elementHash": "cedb6c9f0b",
+      "type": "input",
+      "value": "{email}"
+    },
+    {
+      "description": "Enter Telephone into the Phone Number field (optional).",
+      "output": null,
+      "cssSelector": "#telephone",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div[4]/div/input",
+      "elementTag": "input",
+      "elementHash": "6c4045bb23",
+      "type": "input",
+      "value": "{telephone}"
+    },
+    {
+      "description": "Enter Comment/Message into the textarea.",
+      "output": null,
+      "cssSelector": "#comment",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/fieldset/div[5]/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "8847413c60",
+      "type": "input",
+      "value": "{comment}"
+    },
+    {
+      "description": "Click the Submit button to send the form.",
+      "output": null,
+      "cssSelector": "button[title=\"Submit\"][title=\"Submit\"]",
+      "xpath": "html/body/div[2]/main/div[3]/div/form/div/div/button",
+      "elementTag": "button",
+      "elementHash": "e5da8d6705",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "Base URL with protocol (e.g., http://localhost:7770 for VWA or http://3.12.136.212:7770 for WebArena)"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "format": "user@domain.com",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "telephone",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "comment",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    }
+  ]
+}

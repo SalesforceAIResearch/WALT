@@ -1,0 +1,200 @@
+{
+  "name": "workflow_search_invoices.v3",
+  "description": "Filter Admin invoices by period, status, totals, customer, and store view.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open the Invoices grid page",
+      "output": null,
+      "type": "navigation",
+      "url": "http://3.12.136.212:7780/admin/sales/invoice/",
+      "url_operation": null
+    },
+    {
+      "description": "Enter global search keyword",
+      "output": null,
+      "cssSelector": "input[placeholder=\"Search by keyword\"][aria-label=\"Search by keyword\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[2]/input",
+      "elementTag": "input",
+      "elementHash": "4e641cc4c6",
+      "type": "input",
+      "value": "{search_keyword}"
+    },
+    {
+      "description": "Submit global search",
+      "output": null,
+      "cssSelector": "button[aria-label=\"Search\"][aria-label=\"Search\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[2]/button",
+      "elementTag": "button",
+      "elementHash": "341036eef5",
+      "type": "click"
+    },
+    {
+      "description": "Clear all active filters (reset state)",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-reset\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[4]/div[3]/button",
+      "elementTag": "button",
+      "elementHash": "fc89c7c126",
+      "type": "click"
+    },
+    {
+      "description": "Open Filters panel",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-expand\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[3]/div/button",
+      "elementTag": "button",
+      "elementHash": "e1690a31fa",
+      "type": "click"
+    },
+    {
+      "description": "Invoice Date - from (MM/DD/YYYY)",
+      "output": null,
+      "cssSelector": "input[name=\"created_at[from]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[5]/fieldset/fieldset/div/div/input",
+      "elementTag": "input",
+      "elementHash": "517db2137c",
+      "type": "input",
+      "value": "{invoice_date_from}"
+    },
+    {
+      "description": "Invoice Date - to (MM/DD/YYYY)",
+      "output": null,
+      "cssSelector": "input[name=\"created_at[to]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[5]/fieldset/fieldset/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "ffd16222db",
+      "type": "input",
+      "value": "{invoice_date_to}"
+    },
+    {
+      "description": "Set Status filter",
+      "output": null,
+      "cssSelector": "select[name=\"state\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[5]/fieldset/div[5]/div/select",
+      "elementTag": "select",
+      "elementHash": "0dc152c5a2",
+      "type": "select_change",
+      "selectedText": "{status}"
+    },
+    {
+      "description": "Grand Total (Purchased) - from amount",
+      "output": null,
+      "cssSelector": "input[name=\"grand_total[from]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[5]/fieldset/fieldset[4]/div/div/input",
+      "elementTag": "input",
+      "elementHash": "0efb68cb91",
+      "type": "input",
+      "value": "{grand_total_purchased_from}"
+    },
+    {
+      "description": "Grand Total (Purchased) - to amount",
+      "output": null,
+      "cssSelector": "input[name=\"grand_total[to]\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[5]/fieldset/fieldset[4]/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "6a4db07e98",
+      "type": "input",
+      "value": "{grand_total_purchased_to}"
+    },
+    {
+      "description": "Bill-to Name filter",
+      "output": null,
+      "cssSelector": "input[name=\"billing_name\"][type=\"text\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[5]/fieldset/div[4]/div/input",
+      "elementTag": "input",
+      "elementHash": "dc9b1bc5a0",
+      "type": "input",
+      "value": "{bill_to_name}"
+    },
+    {
+      "description": "Locate the filter labeled 'Purchased From' in the Filters panel and choose the option matching {store_view}.",
+      "output": null,
+      "type": "agent",
+      "task": "Set the 'Purchased From' (Store View) select in the Filters panel to {store_view}",
+      "max_steps": 5
+    },
+    {
+      "description": "Apply Filters",
+      "output": null,
+      "cssSelector": "button[data-action=\"grid-filter-apply\"]",
+      "xpath": "html/body/div[2]/main/div/div/div/div/div[2]/div/div[5]/div/div/button[2]",
+      "elementTag": "button",
+      "elementHash": "a0f0d35e24",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "search_keyword",
+      "type": "string",
+      "format": null,
+      "description": "Global search keyword to filter invoices quickly (e.g., invoice number like 000000002)",
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "invoice_date_from",
+      "type": "string",
+      "format": "MM/DD/YYYY",
+      "description": "Invoice Date filter - start date (MM/DD/YYYY)",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "invoice_date_to",
+      "type": "string",
+      "format": "MM/DD/YYYY",
+      "description": "Invoice Date filter - end date (MM/DD/YYYY)",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "format": null,
+      "description": "Invoice Status filter visible text",
+      "required": false,
+      "enum": [
+        "Pending",
+        "Paid",
+        "Canceled"
+      ]
+    },
+    {
+      "name": "grand_total_purchased_from",
+      "type": "string",
+      "format": null,
+      "description": "Grand Total (Purchased) minimum amount (numbers only)",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "grand_total_purchased_to",
+      "type": "string",
+      "format": null,
+      "description": "Grand Total (Purchased) maximum amount (numbers only)",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "bill_to_name",
+      "type": "string",
+      "format": null,
+      "description": "Bill-to Name filter (partial or full)",
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "store_view",
+      "type": "string",
+      "format": null,
+      "description": "Store View for 'Purchased From' filter (as shown in selector)",
+      "required": false,
+      "enum": [
+        "All Store Views",
+        "Default Store View"
+      ]
+    }    
+  ]
+}

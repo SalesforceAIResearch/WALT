@@ -1,0 +1,50 @@
+# VisualWebArena Evaluation with Discovered Tools
+# This config represents an evaluation run using discovered tools
+# Usage: python -m walt.benchmarks.vwa.aeval --config experiment_configs/vwa_with_tools.yaml
+
+name: "VWA with Tools - Classifieds"
+description: "Evaluation on VWA classifieds domain using discovered tools"
+
+tags:
+  - vwa
+  - with-tools
+  - classifieds
+
+llm:
+  agent_model: gpt-5-mini
+  planner_model: gpt-5-mini
+  temperature: 0.0
+
+agent:
+  max_steps: 30
+  use_stealth: false
+  use_vision: true
+  max_actions_per_step: 10
+
+benchmark:
+  type: vwa
+  website: classifieds
+  task_list: src/walt/benchmarks/vwa/test_configs/visualwebarena/test_classifieds_v2/tasks.json
+  reset_environment: false
+  authenticate: true
+  generate_test_data: true
+
+execution:
+  parallel: 16
+  save_traces: true
+  save_screenshots: false
+
+output:
+  dir: outputs/vwa-classifieds-tools
+  log_level: INFO
+  generate_report: true
+  save_raw_results: true
+
+# Tool directory configuration
+# This should be passed as --tool_dir to the script
+tool_dir: walt-tools/classifieds
+
+notes: |
+  Evaluation using discovered tools from walt-tools/classifieds.
+  Tools should be discovered first using: walt discover classifieds --benchmark vwa
+

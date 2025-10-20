@@ -1,0 +1,345 @@
+{
+    "workflows": [
+        {
+            "name": "search_places",
+            "start_url": "http://3.12.136.212:3000/#map=7/42.896/-75.108",
+            "description": "Search the map for user-provided places or addresses and open the results list",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter user-provided search terms"
+                },
+                {
+                    "type": "button",
+                    "purpose": "submit search (Go)"
+                },
+                {
+                    "type": "list",
+                    "purpose": "browse categorized results (e.g., City, State, University, Attraction) and open an item"
+                },
+                {
+                    "type": "link",
+                    "purpose": "load more results if available"
+                }
+            ]
+        },
+        {
+            "name": "reverse_geocode_where_is_this",
+            "start_url": "http://3.12.136.212:3000/history#map=8/41.539/-72.532",
+            "description": "Resolve the current map point to an address/place using providers and copy related links",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "trigger 'Where is this?' for the current map center"
+                },
+                {
+                    "type": "list",
+                    "purpose": "view providers and their results (Internal, OpenStreetMap Nominatim)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "open the primary place result (e.g., planning region relation)"
+                },
+                {
+                    "type": "links",
+                    "purpose": "copy share link, short link, and geo URI for the current map point"
+                }
+            ]
+        },
+        {
+            "name": "get_directions",
+            "start_url": "http://3.12.136.212:3000/directions?engine=fossgis_osrm_car&route=42.3554%2C-71.0605%3B40.7127%2C-74.0060#map=8/41.539/-72.532",
+            "description": "Compute a route between two user-provided places with a chosen travel profile and retrieve summary and steps",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter From location"
+                },
+                {
+                    "type": "input",
+                    "purpose": "enter To location"
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose routing profile",
+                    "options": [
+                        "Bicycle (OSRM)",
+                        "Car (OSRM)",
+                        "Foot (OSRM)"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "compute route (Go)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "reverse directions"
+                },
+                {
+                    "type": "list",
+                    "purpose": "review turn-by-turn steps with distance/time summary"
+                }
+            ]
+        },
+        {
+            "name": "share_map_link",
+            "start_url": "http://3.12.136.212:3000/directions?engine=fossgis_osrm_car&route=42.3554%2C-71.0605%3B40.7127%2C-74.0060#map=8/41.539/-72.532",
+            "description": "Generate a shareable link/short link and optional embed/image settings for the current map view",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open Share panel"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "include marker in shared view"
+                },
+                {
+                    "type": "tabs",
+                    "purpose": "switch between Link, Short Link, and HTML"
+                },
+                {
+                    "type": "input",
+                    "purpose": "copy full share link"
+                },
+                {
+                    "type": "input",
+                    "purpose": "copy short link"
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose image export format",
+                    "options": [
+                        "PNG",
+                        "JPEG",
+                        "SVG",
+                        "PDF"
+                    ]
+                },
+                {
+                    "type": "input",
+                    "purpose": "set export scale (e.g., 1x)"
+                },
+                {
+                    "type": "toggle",
+                    "purpose": "enable custom dimensions for image export"
+                }
+            ]
+        },
+        {
+            "name": "export_map_data",
+            "start_url": "http://3.12.136.212:3000/export#map=8/41.539/-72.532",
+            "description": "Export OpenStreetMap data for a specified bounding box or access bulk data sources",
+            "elements": [
+                {
+                    "type": "inputs",
+                    "purpose": "edit bounding box values (maxlat, minlon, maxlon, minlat)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "manually select a different area on the map"
+                },
+                {
+                    "type": "notice",
+                    "purpose": "area-too-large warning guidance"
+                },
+                {
+                    "type": "links",
+                    "purpose": "open external bulk download sources (Overpass API, Planet OSM, Geofabrik Downloads, Other Sources)"
+                }
+            ]
+        },
+        {
+            "name": "switch_map_layer",
+            "start_url": "http://3.12.136.212:3000/directions?engine=fossgis_osrm_car&route=42.3554%2C-71.0605%3B40.7127%2C-74.0060#map=8/41.539/-72.532",
+            "description": "Change the base map layer to the user-selected style",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open Layers panel"
+                },
+                {
+                    "type": "radio",
+                    "purpose": "choose base layer",
+                    "options": [
+                        "Standard",
+                        "CyclOSM",
+                        "\u00d6PNVKarte",
+                        "Humanitarian"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "toggle_map_overlay",
+            "start_url": "http://3.12.136.212:3000/directions?engine=fossgis_osrm_car&route=42.3554%2C-71.0605%3B40.7127%2C-74.0060#map=8/41.539/-72.532",
+            "description": "Toggle supplemental overlays on the map for data-inspection or community context",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open Layers panel"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "toggle Map Notes overlay"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "toggle Map Data overlay"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "toggle Public GPS Traces overlay"
+                }
+            ]
+        },
+        {
+            "name": "browse_area_history",
+            "start_url": "http://3.12.136.212:3000/history#map=8/41.539/-72.532",
+            "description": "Review changesets affecting the current map area and adjust the map extent to refine results",
+            "elements": [
+                {
+                    "type": "map",
+                    "purpose": "pan/zoom to change the bounding box filter"
+                },
+                {
+                    "type": "list",
+                    "purpose": "view changesets (username, comment, time, bbox) or empty state"
+                }
+            ]
+        },
+        {
+            "name": "browse_gps_traces",
+            "start_url": "http://3.12.136.212:3000/traces",
+            "description": "Browse recent public GPS trace uploads and navigate to the upload form if desired",
+            "elements": [
+                {
+                    "type": "tabs",
+                    "purpose": "switch between All Traces and Upload a trace"
+                },
+                {
+                    "type": "list",
+                    "purpose": "browse trace items (empty state possible)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "open Upload a new trace (requires login)"
+                }
+            ]
+        },
+        {
+            "name": "browse_user_diaries",
+            "start_url": "http://3.12.136.212:3000/diary",
+            "description": "Browse users' diary entries and access feed links",
+            "elements": [
+                {
+                    "type": "list",
+                    "purpose": "view diary entries (empty state possible)"
+                },
+                {
+                    "type": "link",
+                    "purpose": "access RSS feed for diaries"
+                }
+            ]
+        },
+        {
+            "name": "view_feature_details",
+            "start_url": "http://3.12.136.212:3000/search?query=New%20York#map=11/40.6976/-73.9799",
+            "description": "Open a selected map feature\u2019s details page (node/way/relation) and inspect metadata, tags, and relationships",
+            "elements": [
+                {
+                    "type": "list",
+                    "purpose": "choose a result linking to a feature (e.g., relation/way/node)"
+                },
+                {
+                    "type": "panel",
+                    "purpose": "view title (name + id), type, version, last-edited info"
+                },
+                {
+                    "type": "table",
+                    "purpose": "inspect tags (key/value pairs)"
+                },
+                {
+                    "type": "links",
+                    "purpose": "open View History or Download XML; navigate to parent/child members"
+                }
+            ]
+        },
+        {
+            "name": "communities_listing",
+            "start_url": "http://3.12.136.212:3000/communities",
+            "description": "Discover and open links to OpenStreetMap local chapters and community pages",
+            "elements": [
+                {
+                    "type": "list",
+                    "purpose": "browse Local Chapters and open external community links"
+                },
+                {
+                    "type": "link",
+                    "purpose": "open the Communities wiki page"
+                }
+            ]
+        },
+        {
+            "name": "show_my_location",
+            "start_url": "http://3.12.136.212:3000/relation/61320#map=7/43.153/-75.850",
+            "description": "Center the map on the user\u2019s current location (browser geolocation permission required)",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "trigger Show My Location (may prompt for permission)"
+                },
+                {
+                    "type": "map",
+                    "purpose": "recenter to detected location and place a marker if granted"
+                }
+            ]
+        },
+        {
+            "name": "view_feature_history",
+            "start_url": "http://3.12.136.212:3000/relation/61320#map=7/43.153/-75.850",
+            "description": "Open a specific feature\u2019s edit history from its details page",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "open View History for the current feature"
+                },
+                {
+                    "type": "list",
+                    "purpose": "review historical versions/changesets"
+                }
+            ]
+        },
+        {
+            "name": "download_feature_xml",
+            "start_url": "http://3.12.136.212:3000/relation/61320#map=7/43.153/-75.850",
+            "description": "Download the raw OSM XML for the current feature for offline inspection or tooling",
+            "elements": [
+                {
+                    "type": "link",
+                    "purpose": "Download XML for node/way/relation"
+                }
+            ]
+        },
+        {
+            "name": "get_share_short_link",
+            "start_url": "http://3.12.136.212:3000/directions?engine=fossgis_osrm_car&route=42.3554%2C-71.0605%3B40.7127%2C-74.0060#map=8/41.539/-72.532",
+            "description": "Generate and copy a short URL for the current map view for easy sharing",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open Share panel"
+                },
+                {
+                    "type": "tab",
+                    "purpose": "select Short Link tab"
+                },
+                {
+                    "type": "input",
+                    "purpose": "copy short link value"
+                }
+            ]
+        }
+    ]
+}

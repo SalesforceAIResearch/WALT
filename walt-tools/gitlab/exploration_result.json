@@ -1,0 +1,519 @@
+{
+    "workflows": [
+        {
+            "name": "search_projects",
+            "start_url": "http://3.12.136.212:8023/",
+            "description": "Search and sort projects from the dashboard using user-provided keywords and sorting preference",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter project name filter (Filter by name)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "apply sort by user choice (e.g., Most stars)",
+                    "options": [
+                        "Most stars"
+                    ]
+                },
+                {
+                    "type": "tabs",
+                    "purpose": "switch dashboard sections",
+                    "options": [
+                        "All",
+                        "Starred",
+                        "Explore",
+                        "Topics"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "view_starred_projects",
+            "start_url": "http://3.12.136.212:8023/",
+            "description": "Open the Starred tab to view projects the user has starred",
+            "elements": [
+                {
+                    "type": "tab",
+                    "purpose": "open Starred projects list"
+                }
+            ]
+        },
+        {
+            "name": "explore_projects_directory",
+            "start_url": "http://3.12.136.212:8023/",
+            "description": "Browse the Explore projects directory from the dashboard",
+            "elements": [
+                {
+                    "type": "tab",
+                    "purpose": "open Explore projects"
+                }
+            ]
+        },
+        {
+            "name": "browse_topics",
+            "start_url": "http://3.12.136.212:8023/",
+            "description": "Open Topics directory and filter topics by user-provided term",
+            "elements": [
+                {
+                    "type": "tab",
+                    "purpose": "open Topics directory"
+                },
+                {
+                    "type": "input",
+                    "purpose": "filter topics by keyword"
+                }
+            ]
+        },
+        {
+            "name": "search_all",
+            "start_url": "http://3.12.136.212:8023/",
+            "description": "Use the global search box to search across projects, issues, code, and more",
+            "elements": [
+                {
+                    "type": "input",
+                    "purpose": "enter global search terms"
+                },
+                {
+                    "type": "key",
+                    "purpose": "submit with Enter"
+                },
+                {
+                    "type": "tabs",
+                    "purpose": "filter result types (select desired category)"
+                }
+            ]
+        },
+        {
+            "name": "list_project_issues_with_filters",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "List project issues and filter/sort using available controls (open/closed/all, sort)",
+            "elements": [
+                {
+                    "type": "tabs",
+                    "purpose": "choose issue state",
+                    "options": [
+                        "Open",
+                        "Closed",
+                        "All"
+                    ]
+                },
+                {
+                    "type": "select",
+                    "purpose": "sort issues",
+                    "options": [
+                        "Created date"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "New issue"
+                },
+                {
+                    "type": "menu",
+                    "purpose": "Import issues",
+                    "options": [
+                        "Import CSV",
+                        "Import from Jira"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "create_issue",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "Create a new issue with user-provided title and description",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open New issue form"
+                },
+                {
+                    "type": "input",
+                    "purpose": "issue title"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "issue description"
+                },
+                {
+                    "type": "button",
+                    "purpose": "submit Create issue"
+                }
+            ]
+        },
+        {
+            "name": "view_issue",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "Open an issue by clicking the desired row (by title or number) to view details",
+            "elements": [
+                {
+                    "type": "list",
+                    "purpose": "issue rows including title, number, author, comments count"
+                },
+                {
+                    "type": "link",
+                    "purpose": "open selected issue detail"
+                }
+            ]
+        },
+        {
+            "name": "post_issue_comment",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "On an issue detail page, add a discussion comment with user-provided text",
+            "elements": [
+                {
+                    "type": "textarea",
+                    "purpose": "enter comment text"
+                },
+                {
+                    "type": "button",
+                    "purpose": "post Comment"
+                }
+            ]
+        },
+        {
+            "name": "react_to_issue_comment",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "Add an emoji reaction to a specific comment in an issue discussion",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open Add reaction picker"
+                },
+                {
+                    "type": "input",
+                    "purpose": "search emoji (e.g., 'thumb')"
+                },
+                {
+                    "type": "button",
+                    "purpose": "choose emoji from picker"
+                }
+            ]
+        },
+        {
+            "name": "add_issue_label",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "Assign labels to an issue via the Labels sidebar editor; create new label if not found",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open Labels editor (Edit)"
+                },
+                {
+                    "type": "input",
+                    "purpose": "search existing labels"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Create project label (if needed)"
+                },
+                {
+                    "type": "input",
+                    "purpose": "new label name"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Create label"
+                },
+                {
+                    "type": "checkbox",
+                    "purpose": "select one or more labels to assign"
+                }
+            ]
+        },
+        {
+            "name": "add_issue_todo",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "Create a personal To-Do item from an issue detail page",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Add a to do"
+                }
+            ]
+        },
+        {
+            "name": "manage_issue_todo",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "Mark an issue-related To-Do as done from the issue detail page",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Mark as done"
+                }
+            ]
+        },
+        {
+            "name": "close_issue",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "Change issue state to closed from the issue detail page",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Close issue"
+                }
+            ]
+        },
+        {
+            "name": "reopen_issue",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/issues",
+            "description": "Reopen a closed issue from the issue detail page",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Reopen issue"
+                }
+            ]
+        },
+        {
+            "name": "list_project_merge_requests",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/wikis/Home",
+            "description": "From the project, open the Merge requests section to view the list",
+            "elements": [
+                {
+                    "type": "nav",
+                    "purpose": "open project Merge requests list"
+                }
+            ]
+        },
+        {
+            "name": "create_merge_request",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/wikis/Home",
+            "description": "Start a new merge request by selecting source and target branches, then proceed to compare and submit with user-provided title/description",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "New merge request"
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose source branch"
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose target branch"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Compare branches and continue"
+                },
+                {
+                    "type": "input",
+                    "purpose": "MR title"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "MR description"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Submit merge request"
+                }
+            ]
+        },
+        {
+            "name": "browse_repository_files",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/tree/main",
+            "description": "Navigate repository file tree for a given branch",
+            "elements": [
+                {
+                    "type": "list",
+                    "purpose": "files and directories"
+                },
+                {
+                    "type": "link",
+                    "purpose": "open file/directory"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Find file"
+                }
+            ]
+        },
+        {
+            "name": "find_file",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/tree/main",
+            "description": "Use Find file to locate a file by name and open it",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "open Find file"
+                },
+                {
+                    "type": "input",
+                    "purpose": "type file name to filter results"
+                },
+                {
+                    "type": "link",
+                    "purpose": "open selected file from results"
+                }
+            ]
+        },
+        {
+            "name": "view_file",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/tree/main",
+            "description": "Open a file (e.g., README.md) to view its contents and available actions",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Toggle actions dropdown"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Edit"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Raw/Download/Blame (as available)"
+                }
+            ]
+        },
+        {
+            "name": "edit_file_and_commit",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/tree/main",
+            "description": "Edit a file in the web editor and commit the change to a chosen branch with an optional commit message",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Edit file"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "modify file content"
+                },
+                {
+                    "type": "input",
+                    "purpose": "commit message (optional)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Commit changes"
+                }
+            ]
+        },
+        {
+            "name": "list_commits",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/tree/main",
+            "description": "View commit history for the current branch and filter as needed",
+            "elements": [
+                {
+                    "type": "nav",
+                    "purpose": "open Commits page"
+                },
+                {
+                    "type": "select",
+                    "purpose": "choose branch"
+                },
+                {
+                    "type": "input",
+                    "purpose": "filter by commit message"
+                }
+            ]
+        },
+        {
+            "name": "list_branches",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/branches/active",
+            "description": "Browse branches using tabs and available actions",
+            "elements": [
+                {
+                    "type": "tabs",
+                    "purpose": "switch branch views",
+                    "options": [
+                        "Overview",
+                        "Active",
+                        "Stale",
+                        "All"
+                    ]
+                },
+                {
+                    "type": "button",
+                    "purpose": "Delete merged branches"
+                },
+                {
+                    "type": "link",
+                    "purpose": "New branch"
+                },
+                {
+                    "type": "menu",
+                    "purpose": "download archive for a branch",
+                    "options": [
+                        "zip",
+                        "tar.gz",
+                        "tar.bz2",
+                        "tar"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "list_tags",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/tree/main",
+            "description": "Open Tags section to view or create tags (if none exist)",
+            "elements": [
+                {
+                    "type": "nav",
+                    "purpose": "open Tags page"
+                },
+                {
+                    "type": "button",
+                    "purpose": "New tag"
+                },
+                {
+                    "type": "input",
+                    "purpose": "search tags"
+                }
+            ]
+        },
+        {
+            "name": "create_wiki_page",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/wikis/Home",
+            "description": "Create a new Wiki page with user-provided title, content, and commit message",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "New page / Create your first page"
+                },
+                {
+                    "type": "input",
+                    "purpose": "page title"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "page content (markdown/RT editor)"
+                },
+                {
+                    "type": "input",
+                    "purpose": "commit message (optional)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Create page"
+                }
+            ]
+        },
+        {
+            "name": "edit_wiki_page",
+            "start_url": "http://3.12.136.212:8023/byteblaze/webagent/-/wikis/Home",
+            "description": "Edit an existing Wiki page and save changes",
+            "elements": [
+                {
+                    "type": "button",
+                    "purpose": "Edit page"
+                },
+                {
+                    "type": "textarea",
+                    "purpose": "update page content"
+                },
+                {
+                    "type": "input",
+                    "purpose": "commit message (optional)"
+                },
+                {
+                    "type": "button",
+                    "purpose": "Save changes"
+                }
+            ]
+        }
+    ]
+}

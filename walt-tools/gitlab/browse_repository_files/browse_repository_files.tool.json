@@ -1,0 +1,48 @@
+{
+  "name": "GitLab direct file access",
+  "description": "Navigate directly to a specific file in a GitLab repository for viewing or editing. Optimized for WebArena tasks that work with known files like LICENSE, README, etc.",
+  "version": "2.0.0",
+  "steps": [
+    {
+      "description": "Navigate directly to the specified file in the repository.",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/{project_path}/-/blob/{ref}/{file_path}",
+      "url_operation": null
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": "url",
+      "required": true,
+      "enum": null,
+      "description": "GitLab base URL with protocol (e.g., https://gitlab.example.com)"
+    },
+    {
+      "name": "project_path",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null,
+      "description": "Project path without leading slash (e.g., username/projectname)"
+    },
+    {
+      "name": "ref",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null,
+      "description": "Branch, tag, or commit reference (e.g., main, master, v1.0.0)"
+    },
+    {
+      "name": "file_path",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null,
+      "description": "Path to the file within the repository (e.g., LICENSE, README.md, src/main.py)"
+    }
+  ]
+}

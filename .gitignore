@@ -1,0 +1,75 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Outputs
+outputs/
+logs/
+traces/
+gifs/
+*.gif
+*.mp4
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Playwright
+.playwright/
+
+# Model caches
+cache/
+.cache/
+
+src/walt/benchmarks/wa/config_files/webarena/
+src/walt/benchmarks/wa/config_files/test.json
+src/walt/benchmarks/vwa/test_configs/visualwebarena/**/*
+src/walt/benchmarks/vwa/test_configs/visualwebarena/test_classifieds_v2.json
+src/walt/benchmarks/vwa/test_configs/visualwebarena/test_shopping_v2.json
+src/walt/benchmarks/vwa/test_configs/visualwebarena/test_reddit_v2.json

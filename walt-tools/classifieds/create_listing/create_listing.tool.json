@@ -1,0 +1,275 @@
+{
+  "name": "create_classified_listing",
+  "description": "Create and publish a new listing by filling category, title, description, price/currency, location (region/city), seller contact, optionally upload images via Dropzone, and submit. Precondition: None (Can be called from any page). Successful outcome: Published listing.",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "description": "Open site home",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/",
+      "url_operation": null
+    },
+    {
+      "description": "Open Publish Ad page directly (skip header click)",
+      "output": null,
+      "type": "navigation",
+      "url": "{base_url}/index.php?page=item&action=item_add",
+      "url_operation": null
+    },
+    {
+      "description": "Select listing category by visible text",
+      "output": null,
+      "cssSelector": "#catId",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div/div/select",
+      "elementTag": "select",
+      "elementHash": "088d3b02e8",
+      "type": "select_change",
+      "selectedText": "{category_text}"
+    },
+    {
+      "description": "Enter listing title",
+      "output": null,
+      "cssSelector": "#titleen_US",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[2]/div/input",
+      "elementTag": "input",
+      "elementHash": "1c6a31d7b5",
+      "type": "input",
+      "value": "{title}"
+    },
+    {
+      "description": "Enter listing description",
+      "output": null,
+      "cssSelector": "#descriptionen_US",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[3]/div/textarea",
+      "elementTag": "textarea",
+      "elementHash": "47c4444200",
+      "type": "input",
+      "value": "{description}"
+    },
+    {
+      "description": "Enter price amount",
+      "output": null,
+      "cssSelector": "#price",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[4]/div/input",
+      "elementTag": "input",
+      "elementHash": "e457e89369",
+      "type": "input",
+      "value": "{price}"
+    },
+    {
+      "description": "Select currency symbol (\u20ac, \u00a3, $)",
+      "output": null,
+      "cssSelector": "#currency",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[4]/div/select",
+      "elementTag": "select",
+      "elementHash": "0f327d007e",
+      "type": "select_change",
+      "selectedText": "{currency_symbol}"
+    },
+    {
+      "description": "Select Region (US state)",
+      "output": null,
+      "cssSelector": "#regionId",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[6]/div/div/select",
+      "elementTag": "select",
+      "elementHash": "6e0b45d0bb",
+      "type": "select_change",
+      "selectedText": "{region_text}"
+    },
+    {
+      "description": "City list loads via AJAX after Region selection; ensure options are available before selecting city.",
+      "output": null,
+      "type": "agent",
+      "task": "Wait until the City dropdown is populated for the selected region so that the option {city_text} is available.",
+      "max_steps": 5
+    },
+    {
+      "description": "Select City by visible text",
+      "output": null,
+      "cssSelector": "#cityId",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[6]/div[2]/div/select",
+      "elementTag": "select",
+      "elementHash": "11ce414af8",
+      "type": "select_change",
+      "selectedText": "{city_text}"
+    },
+    {
+      "description": "Enter City Area (optional)",
+      "output": null,
+      "cssSelector": "#cityArea",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[6]/div[3]/div/input",
+      "elementTag": "input",
+      "elementHash": "7c4e757edc",
+      "type": "input",
+      "value": "{city_area}"
+    },
+    {
+      "description": "Enter Address (optional)",
+      "output": null,
+      "cssSelector": "#address",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[6]/div[4]/div/input",
+      "elementTag": "input",
+      "elementHash": "e410a7547a",
+      "type": "input",
+      "value": "{address}"
+    },
+    {
+      "description": "Enter Phone (optional)",
+      "output": null,
+      "cssSelector": "#contactPhone",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[7]/div/div/input",
+      "elementTag": "input",
+      "elementHash": "3639ecbe5d",
+      "type": "input",
+      "value": "{phone}"
+    },
+    {
+      "description": "Enter Other contact (optional)",
+      "output": null,
+      "cssSelector": "#contactOther",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[7]/div[3]/div/input",
+      "elementTag": "input",
+      "elementHash": "a23b650904",
+      "type": "input",
+      "value": "{other_contact}"
+    },
+    {
+      "description": "Uploader uses a Dropzone with hidden file input; click drop area to open file picker and upload provided images.",
+      "output": null,
+      "type": "agent",
+      "task": "Upload images to the listing using the Dropzone area labeled 'Click or Drop for upload images'. Select local files from {image_paths}.",
+      "max_steps": 6
+    },
+    {
+      "description": "Publish the listing",
+      "output": null,
+      "cssSelector": "button.btn.btn-primary",
+      "xpath": "html/body/section/div[3]/div/div/div/form/fieldset/div[9]/div/button",
+      "elementTag": "button",
+      "elementHash": "6b7b9aeb9f",
+      "type": "click"
+    }
+  ],
+  "input_schema": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "category_text",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "Antiques",
+        "Appliances",
+        "Arts + crafts",
+        "Auto parts",
+        "Beauty + health",
+        "Bikes",
+        "Boats",
+        "Books",
+        "Cars + trucks",
+        "Cell phones",
+        "Collectibles",
+        "Computer parts",
+        "Computers",
+        "Electronics",
+        "Farm + garden",
+        "Furniture",
+        "Household",
+        "Jewelry",
+        "Motorcycles",
+        "Music instruments",
+        "Photo + video",
+        "Rvs + campers",
+        "Video gaming"
+      ]
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "price",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "currency_symbol",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": [
+        "$",
+        "\u20ac",
+        "\u00a3"
+      ]
+    },
+    {
+      "name": "region_text",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "city_text",
+      "type": "string",
+      "format": null,
+      "required": true,
+      "enum": null
+    },
+    {
+      "name": "city_area",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "address",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "phone",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "other_contact",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    },
+    {
+      "name": "image_paths",
+      "type": "string",
+      "format": null,
+      "required": false,
+      "enum": null
+    }
+  ]
+}
