@@ -61,30 +61,16 @@ def get_login_controller_and_action(credentials: LoginInCredentials):
 
 def create_llm(provider, model_name, temperature=0.0, random_seed=42):
     if provider == "openai":
-        # Check for gateway configuration
-        base_url = os.getenv("OPENAI_BASE_URL")
-        x_api_key = os.getenv("X_API_KEY")
-        
-        kwargs = {"model": model_name}
-        
-        # Gateway mode: use custom base_url and auth header
-        if base_url and x_api_key:
-            kwargs["api_key"] = "dummy"
-            kwargs["base_url"] = base_url
-            kwargs["default_headers"] = {"X-Api-Key": x_api_key}
-        
-        # Temperature/seed handling (reasoning models don't support temperature)
         if (
             "o3" not in model_name
             and "o4" not in model_name
             and "gpt-5" not in model_name
         ):
-            kwargs["temperature"] = temperature
-            kwargs["seed"] = random_seed
+            llm = ChatOpenAI(
+                model=model_name, temperature=temperature, seed=random_seed
+            )
         else:
-            kwargs["seed"] = random_seed
-            
-        llm = ChatOpenAI(**kwargs)
+            llm = ChatOpenAI(model=model_name, seed=random_seed)
     elif provider == "google":
         llm = ChatGoogleGenerativeAI(
             model=model_name, temperature=0

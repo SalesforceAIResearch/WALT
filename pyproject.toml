@@ -3,7 +3,7 @@ requires = ["setuptools>=65", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "walt"
+name = "sfr-walt"
 version = "0.1.0"
 description = "Web Agents that Learn Tools - Automatic tool discovery from websites"
 readme = "README.md"

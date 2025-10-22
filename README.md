@@ -24,7 +24,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Install WALT (ideally inside a venv)
 uv venv && source .venv/bin/activate
-uv pip install walt
+uv pip install sfr-walt
 playwright install chromium
 
 # Set up configuration
